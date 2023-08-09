@@ -1,0 +1,33 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const postUserPerson_1 = __importDefault(require("../controller/postUserPerson"));
+const postCompany_1 = __importDefault(require("../controller/postCompany"));
+const getAllCompanies_1 = __importDefault(require("../controller/getAllCompanies"));
+const postProduct_1 = __importDefault(require("../controller/postProduct"));
+const getProductById_1 = __importDefault(require("../controller/getProductById"));
+const getAllProducts_1 = __importDefault(require("../controller/getAllProducts"));
+const putUserPerson_1 = __importDefault(require("../controller/putUserPerson"));
+const logIn_1 = __importDefault(require("../controller/logIn"));
+const putProduct_1 = __importDefault(require("../controller/putProduct"));
+const putUserCompany_1 = __importDefault(require("../controller/putUserCompany"));
+const getAllUserPersons_1 = __importDefault(require("../controller/getAllUserPersons"));
+const postQualification_1 = __importDefault(require("../controller/postQualification"));
+const router = (0, express_1.Router)();
+router.post("/user", postUserPerson_1.default);
+router.post("/company", postCompany_1.default);
+router.post("/product", postProduct_1.default);
+router.post("/qualification", postQualification_1.default);
+router.get("/companies", getAllCompanies_1.default);
+router.get("/product/:idProduct", getProductById_1.default);
+router.get("/product", getAllProducts_1.default);
+router.get("/login", logIn_1.default);
+router.get("/persons", getAllUserPersons_1.default);
+router.put("/user", putUserPerson_1.default);
+router.put("/company", putUserCompany_1.default);
+router.put("/product/:productId", putProduct_1.default);
+module.exports = router;
+//# sourceMappingURL=index.js.map

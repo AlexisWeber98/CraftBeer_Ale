@@ -1,4 +1,4 @@
-import { ShoppingHistory } from "../../db";
+
 import UserRole from "../emuns";
 
 export interface ProductModelInterface {
