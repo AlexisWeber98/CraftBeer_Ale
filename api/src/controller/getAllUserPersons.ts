@@ -8,7 +8,6 @@ const getAllUserPersons = async (req: Request, res: Response) => {
     if (!users) {
       return res.status(404).send({ message: "Users not found." });
     }
-
     return res.status(200).json(users);
   } catch (error) {
     return res.status(500).send({ message: "Internal Server Error." });
