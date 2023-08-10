@@ -6,7 +6,7 @@ import {
   postCompany,
   userCreated,
   saveLocalStorageCart,
-  login
+  login,
   totalPagesShop
 } from "./reducerFunctions";
 import {
@@ -16,16 +16,17 @@ import {
   CREATED_COMPANY,
   CREATED_USER,
   LOCAL_STORAGE,
-  LOGIN
+  LOGIN,
   TOTAL_PAGES,
 } from "../redux/actions/actionsTypes";
+import { SaveDataLS } from "../components/LocalStorage/LocalStorage";
 
 /* import { Action } from 'redux';
  */
 export interface AppState {
   allBeer: object[];
   beerFilters: BeerFilters;
-  localStorageCart:object;
+  localStorageCart:SaveDataLS [];
   totalPages:number
   allCompany: object[]
 }
@@ -40,10 +41,13 @@ export interface BeerFilters {
   order?:String,
 }
 
+//hidratar el estado localStorageCart desde la storage 
+const dataStorage = Object.keys(localStorage).map(key => JSON.parse(localStorage[key]));
+
 export const initialState: AppState = {
   allBeer: [],
   beerFilters: {},
-  localStorageCart:localStorage,
+  localStorageCart:dataStorage,
   totalPages:0,
   allCompany: []
 };
@@ -62,15 +66,12 @@ const rootReducer = (
     case CREATED_PRODUCT: {
       return productCreated(state);
     }
-
     case CREATED_COMPANY: {
       return postCompany(state)
     }
-
     case CREATED_USER: {
       return userCreated(state)
     };
-      
     case LOCAL_STORAGE: {
       return saveLocalStorageCart(state,action);
     }
