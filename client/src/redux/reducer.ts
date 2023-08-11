@@ -7,7 +7,9 @@ import {
   userCreated,
   saveLocalStorageCart,
   login,
-  totalPagesShop
+  totalPagesShop,
+  loginVerification,
+  logout,
 } from "./reducerFunctions";
 import {
   CREATED_PRODUCT,
@@ -18,17 +20,26 @@ import {
   LOCAL_STORAGE,
   LOGIN,
   TOTAL_PAGES,
+  LOGIN_VERIFICATION,
+  LOGOUT,
 } from "../redux/actions/actionsTypes";
 import { SaveDataLS } from "../components/LocalStorage/LocalStorage";
 
 /* import { Action } from 'redux';
  */
+export interface AccessLogin {
+  access: boolean;
+  id: string;
+  role: string;
+  cart?: typeof localStorage;
+}
 export interface AppState {
   allBeer: object[];
   beerFilters: BeerFilters;
   localStorageCart:SaveDataLS [];
   totalPages:number
   allCompany: object[]
+  accessLogin: AccessLogin;
 }
 export interface BeerFilters {
   IBU?: number,  // El signo de interrogación indica que la propiedad es opcional
@@ -49,7 +60,13 @@ export const initialState: AppState = {
   beerFilters: {},
   localStorageCart:dataStorage,
   totalPages:0,
-  allCompany: []
+  allCompany: [],
+  accessLogin: {
+    access: false,
+    id: "",
+    role: "",
+    cart: {...localStorage}
+  },
 };
 
 const rootReducer = (
@@ -78,8 +95,14 @@ const rootReducer = (
     case LOGIN: {
       return login(state, action);
     }
+    case LOGOUT: {
+      return logout(state);
+    }
     case TOTAL_PAGES: {
       return totalPagesShop (state,action);
+    }
+    case LOGIN_VERIFICATION: {
+      return loginVerification (state, action)
     }
     default:
       return state;

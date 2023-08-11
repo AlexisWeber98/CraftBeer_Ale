@@ -29,13 +29,13 @@ export const productCreated = (state = initialState) => {
   };
 };
 
-
+//Crear usuario de compañía
 export const postCompany = (state = initialState) => {
   return {
     ...state,
   }
 }
-
+//Crear usuario persona
 export const userCreated = (state = initialState) => {
   return {
     ...state,
@@ -80,12 +80,50 @@ export const saveLocalStorageCart = (
 
 // LOGIN 
 export const login = (state = initialState, action: loginAction) => {
-  return {
-    ...state,
-    localStorageCart: action.payload
+  const user = localStorage.getItem(action.payload.user.id)
+  console.log(user);
+  const json = JSON.parse(user)
+  console.log(json);
+  if(user === null){
+    return {
+      ...state,
+      accessLogin: {
+        access: action.payload.access,
+        id: action.payload.user.id,
+        role: action.payload.user.role
+      }
+    }
+  }else {
+    return {
+      ...state, 
+      accessLogin: {
+        access: json.access,
+        id: json.user.id,
+        role: json.user.role
+      }
+    }
   }
 }
-
+// LOGOUT
+export const logout = (state = initialState) => {
+  return {
+    ...state,
+    accessLogin: {
+      access: false,
+      id: "",
+      role: "",
+      cart: null,
+    }
+  }
+}
+export const loginVerification = (state = initialState, action:loginAction)=> {
+  return {
+    ...state,
+    access: action.payload.access,
+    id: action.payload.user.id,
+    role: action.payload.user.role
+  }
+}
 //ALMACENAR numero de paginas para el shop 
 export const totalPagesShop = (
   state = initialState,
