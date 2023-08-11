@@ -15,7 +15,6 @@ import Cart from './views/Cart/Cart';
 import AboutUs from './views/aboutUs/AboutUs';
 import Contact from './views/Contact/Contact';
 import Creation from './views/Creation/Creation';
-import { Toaster } from 'react-hot-toast'
 import Pay from './views/Pay/Pay';
 
 // COMPONENTS
