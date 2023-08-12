@@ -51,7 +51,11 @@ export interface CompanyData {
 //Actions para recibir todas las cervezas
 export const allBeers = () => {
   const endpoint = "/product";
+<<<<<<< HEAD
   return async function (dispatch: Dispatch<any>) {
+=======
+    return async function (dispatch: Dispatch<any>) {
+>>>>>>> c63d64163749f902f9280a4bf2068b23707322a4
     const response = await axios.get(endpoint);
     return dispatch({
       type: ADD_ALL_BEER,
@@ -102,7 +106,11 @@ export const createdProduct = ({
 }: ProductData) => {
   
   return async function (dispatch: any) {
+<<<<<<< HEAD
     try {
+=======
+  try {
+>>>>>>> c63d64163749f902f9280a4bf2068b23707322a4
       let createdBeer = await axios.post(`/product`, {
         name,
         image,

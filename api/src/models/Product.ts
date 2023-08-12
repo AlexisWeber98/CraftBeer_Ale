@@ -60,7 +60,11 @@ const defineModel = (): ModelCtor<ProductModel> => {
     },
 
 
-
+    userCompanyId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+    
 
   }) as ModelCtor<ProductModel>;
 };
