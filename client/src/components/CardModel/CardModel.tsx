@@ -3,10 +3,11 @@ import Card from 'react-bootstrap/Card';
 import { Col, Row } from 'react-bootstrap';
 import style from "./CardModel.module.css";
 import { Link } from "react-router-dom";
-import { SaveDataLS, saveDataCart } from "../LocalStorage/LocalStorage";
+import { SaveDataLS, deleteDataCart, saveDataCart } from "../LocalStorage/LocalStorage";
 import { useState, useEffect } from "react"; // Agrega 'useEffect'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { localStorageCart } from "../../redux/actions/actions";
+import { AppState } from "../../redux/reducer";
 
 interface CardModelProps {
     id: string;
@@ -23,41 +24,53 @@ interface CardModelProps {
 const CardModel = ({ name, summary, image, price, stock, id, type, IBU }: CardModelProps) => {
 
     const dispatch = useDispatch();
-
-
+    //estado del carrrito 
+    const itemCart = useSelector((state: AppState) => state.localStorageCart)
 
     //estado para controlar los input de cantidades 
     const [item, setItem] = useState(0);
 
     // Cargar la cantidad del localStorage cuando el componente se monta
     useEffect(() => {
-        const savedQuantity = localStorage.getItem(id);
-        if (savedQuantity) {
-            setItem(parseInt(savedQuantity));
+
+        const savedQuantity = itemCart.find(item => item.id === id)
+        if (savedQuantity !== undefined) {
+            setItem(savedQuantity?.quantity);
+        } else {
+            setItem(0);
         }
     }, [id]);
-
 
     // setea los cambios de cantidades y ejecuta para cargar en localStorage
     const handlerItemCart = (event: React.MouseEvent<HTMLButtonElement>) => {
         const target = event.currentTarget;
         const updatedQuantity = target.name === '+' ? item + 1 : item - 1;
-        setItem(updatedQuantity);
 
+
+        setItem(updatedQuantity);
         const itemData: SaveDataLS = {
-            id: id,
+            id,
+            name,
+            price,
+            image,
+            summary,
             quantity: updatedQuantity,
         };
-        saveDataCart(itemData);
-        dispatch(localStorageCart(localStorage));
+
+        if (updatedQuantity > 0) {
+            saveDataCart(itemData)
+        } else {
+            deleteDataCart(itemData.id)
+        };
+
+        dispatch(localStorageCart(itemData));
+
     }
 
-        
-  
-    //borrar el localstorage por ahora
-    const addProductoCart = () => {
-        localStorage.clear()
-    }
+
+
+
+
 
     return (
         <Container>
@@ -85,17 +98,19 @@ const CardModel = ({ name, summary, image, price, stock, id, type, IBU }: CardMo
                                 </div>
                                 <div className={style.navButton}>
                                     <Link to={"/cart"}>
-                                        <button className={style.buttonBuy} disabled={item < 1} onClick={addProductoCart}>COMPRAR</button>
+                                        <button className={style.buttonBuy} disabled={item < 1}>COMPRAR</button>
                                     </Link>
-                                    {item ? <p>Tienes {item} 🍺 En tu carrito !!</p> : <></>}
+                                    { <p className={item? style.navButtonAdd:style.navButtonNull}>Tienes {item} 🍺 En tu carrito !!</p> }
                                 </div>
                             </div>
                         </Col>
                         <Col className={style.colPrice}>
                             <div className={style.containerInfo}>
-                                <h2 className={style.title}>${price}</h2>
-                                <p>☆☆☆☆☆ </p> <br /> <p className={item === stock || stock === 0 ? style.alertOutStock : style.alertStock}>Stock Disponible : {stock} un.</p>
-                                <div className={style.input}>{item} Un.</div>
+                                <h2 className={style.title}> {price.toFixed(2)} U$S</h2>
+                                <p>☆☆☆☆☆ </p>  <p className={item === stock || stock === 0 ? style.alertOutStock : style.alertStock}>Stock Disponible : {stock} un.</p>
+                                <div className={style.centeredContainer}>
+                                    <div className={style.input}>{item} Un.</div>
+                                </div>
                                 <button className={style.custom_button} name={"-"} onClick={handlerItemCart} disabled={item < 1}>-</button>
                                 <button className={style.custom_button} name={"+"} onClick={handlerItemCart} disabled={item >= stock}>+</button>
                             </div>

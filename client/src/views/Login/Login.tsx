@@ -1,7 +1,12 @@
 /// IMPORTS
+import { AnyAction, Dispatch } from "redux";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import loginValidation from "./LoginValidation";
+import { useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
+// ACTION
+import { login } from "../../redux/actions/actions";
 // STYLES
 import styles from "./Login.module.css";
 import Button from 'react-bootstrap/Button';
@@ -10,65 +15,88 @@ import avatar from "../../assets/icons/avatar.png"
 import email from "../../assets/icons/sobre.png"
 import password from "../../assets/icons/candado.png"
 
+export interface login {
+    email: string,
+    password: string
+}
 // LOGIN
 const Login: React.FC = () => {
+    // GLOBAL STATE
+    const dispatch = useDispatch<Dispatch<AnyAction> | any>();
     // LOCAL STATES
-    const [userLogin, setUserLogin] = useState<Object>({
-        name: "",
+    const [userLogin, setUserLogin] = useState<login>({
         email: "",
         password: "",
     });
-    const [errors, setErrors] = useState<Object>({
-        name: "",
+    const [errors, setErrors] = useState<login>({
         email: "",
         password: "",
-        message: "",
     });
-
+    const [isClicked, setIsClicked] = useState<boolean>(false);
+    const [isError, setIsError] = useState<boolean>(false);
     // HANDLERS
     const handlerOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        // const { name, value } = event.target;
-        // setUserLogin((userLogin) => ({
-        //     ...userLogin,
-        //     [name]: value
-        // }));
-        // loginValidation(userLogin, setErrors);
+        const { name, value } = event.target;
+        setUserLogin((prevUserLogin) => ({
+            ...prevUserLogin,
+            [name]: value
+        }));
+        loginValidation(userLogin, setErrors);
     };
-    const handlerOnSubmit = async (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
+    const handlerOnSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
         event.preventDefault();
-        // ACA DESPACHA LOS DATOS DEL ESTADO USERLOGIN
+        try {
+            await setIsClicked(!isClicked);
+            await dispatch(login(userLogin));
+        } catch (error: any) { 
+            if (error.response && error.response.data && error.response.data.message) {
+                const errorMessage = error.response.data.message;
+                toast.error(errorMessage);
+                setIsError(!isError)
+            } else {
+            toast.error("An error occurred while logging in.");
+            }
+        }
     };
-
     return (
         <div className={styles.all}>
-            <div className={styles.avatarCont}>
+            <div className={!isError ? (!isClicked ? styles.avatarCont : styles.avatarContSubmit) : styles.avatarContError}>
                 <img 
                 src={avatar} 
                 alt="avatar"
                 className={styles.avatar}
                 />
             </div>
-            <Form className={styles.form}>
-                <Form.Group className={styles.input1}>
+            <Form 
+            className={!isError ? (!isClicked ? styles.form : styles.formSubmit) : styles.formError}
+            onSubmit={handlerOnSubmit}
+            >
+                <Form.Group className={`${errors.email ? styles.inputError1 : styles.input1}`}>
                     <div>
                         <img src={email} alt="email" />
                     </div>
                     <Form.Control 
+                    required
                     type="email" 
-                    placeholder="Enter email" 
+                    name="email"
+                    placeholder="Enter email"
+                    onChange={handlerOnChange} 
                     />
                 </Form.Group>
-                <Form.Group className={styles.input}>
+                {errors.email && <p className={styles.validationMessage}>{errors.email}</p>}
+                <Form.Group className={`${errors.password ? styles.inputError : styles.input}`}>
                     <div>
                         <img src={password} alt="password" />    
                     </div>
                     <Form.Control 
+                    required
                     type="password" 
+                    name="password"
                     placeholder="Password"
+                    onChange={handlerOnChange}
                     />
                 </Form.Group>
+                {errors.password && <p className={styles.validationMessage}>{errors.password}</p>}
                 <label className={styles.label}>
                     We'll never share your password with anyone else.
                 </label>
@@ -78,20 +106,24 @@ const Login: React.FC = () => {
                     label="Check me out" 
                     />
                     <NavLink 
-                    to="https://www.bbc.com/mundo/noticias/2015/05/150501_vert_fut_cinco_consejos_tonto_finde_ac"
-                    target="_blank"
+                    to="/home"
                     className={styles.forgot}
                     >
                         Forgot Password?
                     </NavLink>
                 </Form.Group>
-                <Button 
-                variant="primary" 
+                <button 
                 type="submit"
                 className={styles.submit}
+                disabled={
+                    !userLogin.email ||
+                    !userLogin.password ||
+                    !!errors.email ||
+                    !!errors.password
+                    }
                 >
                     Submit
-                </Button>
+                </button>
                 <NavLink 
                 to="/chooseSignUp">
                     <Button 

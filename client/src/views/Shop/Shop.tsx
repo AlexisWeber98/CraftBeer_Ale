@@ -8,6 +8,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { orderFilters } from "../../redux/actions/actions";
 import { AppState } from "../../redux/reducer";
+import { Link } from "react-router-dom";
+import craftBeerLogo from "../../assets/img/craftBeerLogo.jpg";
 
 // SHOP
 
@@ -22,16 +24,14 @@ const Shop = () => {
 
 
   //traer la cantidad de articulos en el local storage
-  const [cartAdd, setCartAdd] = useState(0)
-  let cart = useSelector((state: AppState) => state.localStorageCart);
-  let products = Object.values(cart)
-  const numberArray = products.map(str => parseInt(str));
-  const sumProducts = numberArray.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  const itemCart = useSelector((state: AppState) => state.localStorageCart)
+  let sumItem = 0
 
-  useEffect(() => {
-    setCartAdd(sumProducts)
-  }, [cartAdd])
- 
+  itemCart.forEach(element => {
+    sumItem = sumItem + element.quantity
+  });
+
+
 
 
   // estado para controlar el input search
@@ -79,6 +79,7 @@ const Shop = () => {
   // cargar el estado filter con el nombre que ingresa en el input 
   const handlerClick = () => {
     setInput("")
+    setNumberPage(1)
     dispatch(orderFilters({ name: input }))
   }
 
@@ -93,15 +94,23 @@ const Shop = () => {
         />
         <button className={style.button} disabled={disableBoton.search} onClick={handlerClick}>🔍</button>
         <button className={style.buttonAll} onClick={handlerClick}>All</button>
-        <div className={style.imageCart}>
-          <img src="https://www.freeiconspng.com/thumbs/cart-icon/basket-cart-icon-27.png" />
-          <div>
-            <p>{cartAdd}</p>
+
+        <Link to={"/cart"}>
+          <div className={style.imageCart}>
+            <img src="https://www.freeiconspng.com/thumbs/cart-icon/basket-cart-icon-27.png" />
+            <div className={style.imageCartdiv}>
+              {sumItem}
+            </div>
           </div>
-        </div>
+        </Link>
       </div>
       <Row>
-        <Col xs={12} md={3}>
+
+        <Col xs={12} md={3} style={{ justifyContent: "center", alignItems: "center" }}>
+          <div className={style.containerLogo}>
+            <img src={craftBeerLogo} alt="" style={{ objectFit: "cover", width: "100%" }} />
+          </div>
+          <h5 style={{ marginLeft: "38%" }}>PAGINAS</h5>
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <button className={style.button_Pagechange} onClick={handlerPage} name="<" disabled={disableBoton.back}>{"<"} </button>
             <button className={style.button_Pagelateral}>{numberPage === 1 ? <></> : numberPage - 1} </button>
@@ -110,9 +119,19 @@ const Shop = () => {
             <button className={style.button_Pagechange} onClick={handlerPage} name=">" disabled={disableBoton.adv}>{">"} </button>
           </div>
           <Filters />
+          <h5 style={{ marginLeft: "12%" }}>ESPACIO PUBLICITARIO</h5>
+          <div className={style.containerpublicidad}>
+            <img src="https://thumbs.gfycat.com/IlliteratePoliteLeech-size_restricted.gif" alt="" style={{ objectFit: "cover", width: "100%" }} />
+          </div>
+          <div className={style.containerpublicidad}>
+            <img src="https://i.pinimg.com/originals/77/81/ae/7781ae6ad9627464d20fc605b774e6a9.gif" alt="" style={{ objectFit: "cover", width: "100%" }} />
+          </div>
+          <div className={style.containerpublicidad}>
+            <img src="https://unapausaparalapublicidad.files.wordpress.com/2014/08/san-miguel.gif" alt="" style={{ objectFit: "cover", width: "100%" }} />
+          </div>
         </Col>
-        <Col xs={12} md={9}>
-          <div className="d-flex flex-column">
+        <Col xs={12} md={9} className={style.cardsContainer}>
+          <div className={style.Cards}>
             <CardShop />
           </div>
         </Col>

@@ -15,8 +15,19 @@ const Home: React.FC = () => {
   const dispatch = useDispatch(); 
   
   useEffect(() => {
-      dispatch(allBeers())
+    dispatch(allBeers())
   }, []);
+  // useEffect(()=>{
+  //   const userJSON = localStorage.getItem("user")
+  //   console.log(userJSON);
+    
+  //   if(userJSON){
+  //     const user = JSON.parse(userJSON)
+  //     dispatch(verificationLogin(user))
+  //     console.log(user);
+  //   }
+  // }, [dispatch])
+
 
   return (
     <div className={styles.grandContainer}>

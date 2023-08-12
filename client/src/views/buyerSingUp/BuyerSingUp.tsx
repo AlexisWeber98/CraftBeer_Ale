@@ -1,67 +1,155 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { ThunkDispatch } from 'redux-thunk';
 import { Form, Row, Col, Button } from "react-bootstrap";
-import { AnyAction } from 'redux';
-import axios from "axios";
 import { createdUser } from "../../redux/actions/actions"; // Importa la acción creadora de usuarios
-
+import craftBeerLogo from "../../assets/img/craftBeerLogo.jpg";
+import Styles from "./BuyerSingUp.module.css"
+interface UserData {
+  name: string;
+  lastName: string;
+  document: number;
+  email: string;
+  password: string;
+  country: string;
+  city: string;
+  state: string;
+  address: string;
+  image: string;
+  status: string;
+  role: string;
+}
 const BuyerSingUp: React.FC = () => {
-  const [formData, setFormData] = useState<Record<string, string>>({
+  const dispatch = useDispatch<any>();
+  const [formData, setFormData] = useState<UserData>({ 
     name: "",
     lastName: "",
-    document: "",
+    document: 0,
     email: "",
     password: "",
-    country:"",
-    city:"",
-    state:"",
+    country: "",
+    city: "",
+    state: "",
     address: "",
     image: "",
-    status:"",
-    role:""
+    status: "",
+    role: ""
   });
+  const [errors, setErrors] = useState({
+    name: "Se requiere nombre",
+    lastName: "Se requiere apellido",
+    document: "Se requiere documento",
+    email: "Se requiere un email",
+    password: "Se requiere contraseña",
+    country:"Se requiere pais",
+    city:"Se requiere ciudad",
+    state:"Se requiere estado",
+    address: "Se requiere direccion",
+    image: "Se requiere una imagen",
+  })
 
-  const dispatch = useDispatch(); // Obtiene la función dispatcher
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // Realizar la solicitud POST al backend para guardar los datos en la base de datos
-    axios
-      .post("https://craftbeer.up.railway.app//user", formData)
-      .then((response) => {
-        // Manejar la respuesta del backend si es necesario
-        console.log("Usuario creado exitosamente:", response.data);
-        // Llamar a la acción creadora de usuarios y enviar los datos del usuario creado
-        const dispatch = useDispatch<ThunkDispatch<any, any, AnyAction>>();
-      })
-      .catch((error) => {
-        // Manejar el error si ocurre alguno durante la solicitud
-        console.error("Error al crear usuario:", error);
-      });
-  };
-
-  const areAllFieldsFilled = () => {
-    for (const field in formData) {
-      if (formData[field] === "") {
-        return false;
+  const validation = (input: any, name: any) =>{
+    if(name==="name"){
+      if (input.name !== "") setErrors({ ...errors, name: "" });
+      else setErrors({ ...errors, name: "Información requerida" });
+    }
+    if(name === "lastName"){
+      if (input.lastName !== "") setErrors({ ...errors, lastName: "" });
+      else setErrors({ ...errors, lastName: "Información requerida" });
+    }
+    if(name === "document"){
+      if (input.document !== "") setErrors({ ...errors, document: "" });
+      else setErrors({ ...errors, document: "Información requerida" });
+    }
+    if(name === "email"){
+      if (input.email !== "") setErrors({ ...errors, email: "" });
+      else setErrors({ ...errors, email: "Información requerida" });
+    }
+    if (name === "password") {
+      if (input.password !== "") {
+        if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(input.password)) {
+          setErrors({ ...errors, password: "" });
+        } else {
+          setErrors({ ...errors, password: "La contraseña debe contener al menos una mayúscula, una minúscula, un número y tener más de 8 caracteres." });
+        }
+      } else {
+        setErrors({ ...errors, password: "Información requerida" });
       }
     }
-    return true;
+    if(name === "country"){
+      if (input.country !== "") setErrors({ ...errors, country: "" });
+      else setErrors({ ...errors, country: "Información requerida" });
+    }
+    if(name === "city"){
+      if (input.city !== "") setErrors({ ...errors, city: "" });
+      else setErrors({ ...errors, city: "Información requerida" });
+    }
+    if(name === "state"){
+      if (input.state !== "") setErrors({ ...errors, state: "" });
+      else setErrors({ ...errors, state: "Información requerida" });
+    }
+    if(name === "address"){
+      if (input.address !== "") setErrors({ ...errors, address: "" });
+      else setErrors({ ...errors, address: "Información requerida" });
+    }
+    if(name === "image"){
+      if (input.image !== "") setErrors({ ...errors, image: "" });
+      else setErrors({ ...errors, image: "Información requerida" });
+    }
+
+    }
+  
+  
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+    //  console.log(formData)
+
+
+  console.log(formData)
+  dispatch(createdUser(formData))
+  // setFormData({
+  //   name: "",
+  //   lastName: "",
+  //   document: 0,
+  //   email: "",
+  //   password: "",
+  //   country: "",
+  //   city: "",
+  //   state: "",
+  //   address: "",
+  //   image: "",
+  //   status: "",
+  //   role: ""
+  // });
+};
+
+// console.log(formData);
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | any) => {
+    const { name, value } = event.target;
+    setFormData({...formData,[name]: value,});
+    validation({...formData, [name]: value}, name);
   };
+  const disable = (errors:{ [key: string]: string }): boolean => {
+    let disabled = true;
+    for (let error in errors) {
+      if (errors[error] === "") disabled = false;
+      else {
+        disabled = true;
+        break;
+      }
+    }
+    return disabled;
+  };
+  // console.log(formData);
+
+
 
   return (
-    <div>
-      <h2>BUYER SING UP</h2>
-      <Form style={{ width: "700px", height: "auto", padding: "10px" }}>
+    <div className={Styles.container}>
+    
+      <div className={Styles.formBox}>
+      <Form  onSubmit={handleSubmit} style={{ width: "700px", height: "auto", padding: "10px" }}>
   <Row style={{ margin: '15px' }}>
     <Col>
       Nombre:
@@ -70,8 +158,9 @@ const BuyerSingUp: React.FC = () => {
         type="text"
         name="name"
         onChange={handleInputChange}
-        value={formData.name}
+       
       />
+       <h6 className={Styles.mensajes}>{errors.name}</h6>
     </Col>
     <Col>
       Apellido:
@@ -80,8 +169,9 @@ const BuyerSingUp: React.FC = () => {
         type="text"
         name="lastName"
         onChange={handleInputChange}
-        value={formData.lastName}
+       
       />
+      <h6 className={Styles.mensajes}>{errors.lastName}</h6>
     </Col>
   </Row>
   <Row style={{ margin: '15px' }}>
@@ -92,8 +182,9 @@ const BuyerSingUp: React.FC = () => {
         type="number"
         name="document"
         onChange={handleInputChange}
-        value={formData.document}
+       
       />
+      <h6 className={Styles.mensajes}>{errors.document}</h6>
     </Col>
     <Col>
       Contraseña:
@@ -102,8 +193,9 @@ const BuyerSingUp: React.FC = () => {
         type="password"
         name="password"
         onChange={handleInputChange}
-        value={formData.password}
+       
       />
+      <h6 className={Styles.mensajes}>{errors.password}</h6>
     </Col>
   </Row>
   <Row style={{ margin: '15px' }}>
@@ -113,8 +205,9 @@ const BuyerSingUp: React.FC = () => {
         placeholder="Dirección"
         name="address"
         onChange={handleInputChange}
-        value={formData.address}
+        
       />
+      <h6 className={Styles.mensajes}>{errors.address}</h6>
     </Col>
     <Col>
       Imagen:
@@ -123,8 +216,9 @@ const BuyerSingUp: React.FC = () => {
         type="url"
         name="image"
         onChange={handleInputChange}
-        value={formData.image}
+       
       />
+      <h6 className={Styles.mensajes}>{errors.image}</h6>
     </Col>
   </Row>
   <Row style={{ margin: '15px' }}>
@@ -135,8 +229,9 @@ const BuyerSingUp: React.FC = () => {
         type="email"
         name="email"
         onChange={handleInputChange}
-        value={formData.email}
+       
       />
+      <h6 className={Styles.mensajes}>{errors.email}</h6>
     </Col>
   </Row>
   <Row style={{ margin: '15px' }}>
@@ -147,8 +242,9 @@ const BuyerSingUp: React.FC = () => {
         type="text"
         name="country"
         onChange={handleInputChange}
-        value={formData.country}
+      
       />
+      <h6 className={Styles.mensajes}>{errors.country}</h6>
     </Col>
     <Col>
       Ciudad:
@@ -157,8 +253,9 @@ const BuyerSingUp: React.FC = () => {
         type="text"
         name="city"
         onChange={handleInputChange}
-        value={formData.city}
+ 
       />
+      <h6 className={Styles.mensajes}>{errors.city}</h6>
     </Col>
   </Row>
   <Row style={{ margin: '15px' }}>
@@ -169,40 +266,31 @@ const BuyerSingUp: React.FC = () => {
         type="text"
         name="state"
         onChange={handleInputChange}
-        value={formData.state}
+    
       />
+      <h6 className={Styles.mensajes}>{errors.state}</h6>
     </Col>
     <Col>
-      Estatus:
-      <Form.Control
-        as="select"
-        name="status"
-        onChange={handleInputChange}
-        value={formData.status.toString()} // Convertir boolean a string
-      >
-        <option value="true">Disponible</option>
-        <option value="false">No disponible</option>
-      </Form.Control>
+
     </Col>
   </Row>
-  <Row style={{ margin: '15px' }}>
-    <Col>
-      Rol:
-      <Form.Control
-        placeholder="Rol"
-        type="text"
-        name="role"
-        onChange={handleInputChange}
-        value={formData.role}
-      />
-    </Col>
-  </Row>
-</Form>
-      <form onSubmit={handleSubmit}>
-        <Button type="submit">
-          Crear Usuario
-        </Button>
-      </form>
+      <Button type="submit"
+      disabled={disable(errors)}>
+        
+        Crear Usuario
+      </Button>
+   
+ 
+    </Form>
+
+    </div>
+    <Row className={Styles.imageContainer}>
+        <Col >
+          <img className={Styles.image} src={craftBeerLogo} alt="" />
+        </Col>
+    </Row>
+      
+
     </div>
   );
 };

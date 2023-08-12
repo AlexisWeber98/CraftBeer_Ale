@@ -1,21 +1,31 @@
 
 export interface SaveDataLS {
     id: string,
-    quantity: number,    
+    name:string
+    quantity: number,
+    price:number,
+    image:string,
+    summary:string
+}
+
+export interface UserData {
+   // user: object,
+    id: string ,
+    name: string,
+    lastName: string,
+    role: string,
+    access: string
 }
 
 export const saveDataCart = (data: SaveDataLS) => {
-    localStorage.setItem(data.id, JSON.stringify(data.quantity))
+    localStorage.setItem(data.id, JSON.stringify(data))
 }
 
+export const deleteDataCart = (id:string) => {
+    localStorage.removeItem (id)
+}
 
+export const saveUserData = (data:UserData) => {
+    localStorage.setItem("user", JSON.stringify(data))
+}
 
-// Recuperar datos del localStorage
-export const getDataFromCart = (name: string): SaveDataLS | null => {
-    const storedData = localStorage.getItem(name);
-    if (storedData) {
-        // Convertir la cadena JSON de vuelta a un objeto y devolverlo
-        return JSON.parse(storedData);
-    }
-    return null;
-};
