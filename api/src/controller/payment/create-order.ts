@@ -47,6 +47,7 @@ export const createOrder = async (req: Request, res: Response) => {
         pending: "http://localhost:5173/pending",
         failure: "http://localhost:5173/failure",
       } as PreferenceBackUrl,
+      notification_url: "https://craftbeer.up.railway.app/webhook",
       auto_return: "approved",
     });
 

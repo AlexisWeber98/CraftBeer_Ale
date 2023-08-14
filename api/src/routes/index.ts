@@ -14,6 +14,7 @@ import postQualification from "../controller/postQualification"
 import {createOrder} from "../controller/payment/create-order"
 import postShoppingHistory from '../controller/postShoppingHistory';
 import getShoppingHistories from '../controller/getShoppingHistories';
+import recibeWebHook from '../controller/payment/get.Webhook';
 
 const router = Router();
 
@@ -41,6 +42,7 @@ router.put("/product/:productId", putProduct);
 // ------- payment routes ----//
 
 router.post("/create-order", createOrder)
+router.get("/webhook", recibeWebHook)
 
 
 module.exports = router
