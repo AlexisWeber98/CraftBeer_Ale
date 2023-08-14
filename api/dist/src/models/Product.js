@@ -53,6 +53,10 @@ const defineModel = () => {
             allowNull: false,
             defaultValue: true,
         },
+        userCompanyId: {
+            type: sequelize_1.DataTypes.UUID,
+            allowNull: false,
+        },
     });
 };
 exports.default = defineModel;

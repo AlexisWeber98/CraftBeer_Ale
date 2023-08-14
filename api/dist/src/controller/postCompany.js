@@ -8,8 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../../db");
+const postAccountConfirm_1 = __importDefault(require("./postAccountConfirm"));
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,30}$/;
 const postCompany = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -69,6 +73,11 @@ const postCompany = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             return res.status(400).json({
                 message: "Password must contain at least one uppercase letter, one lowercase letter, and one digit. (6 - 30 char)",
             });
+        if (email) {
+            const EmailUnique = yield db_1.UserPerson.findOne({ where: { email: email } });
+            if (EmailUnique)
+                return res.status(400).send("This email is already registered");
+        }
         const userCompany = yield db_1.UserCompany.create({
             name,
             lastName,
@@ -85,6 +94,9 @@ const postCompany = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             status: true,
             role: "Company",
         });
+        if (userCompany) {
+            (0, postAccountConfirm_1.default)(company, email);
+        }
         return res.status(200).json(userCompany);
     }
     catch (error) {

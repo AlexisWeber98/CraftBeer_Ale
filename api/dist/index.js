@@ -9,10 +9,16 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const port = process.env.PORT || 3001;
 const baseDeDatos_1 = __importDefault(require("./helpers/baseDeDatos"));
 dotenv_1.default.config();
-db_1.sequelize.sync({ force: true }).then(() => {
+db_1.sequelize
+    .sync({ force: true })
+    .then(() => {
     (0, baseDeDatos_1.default)();
+    console.log("Database synchronized");
     app_1.default.listen(port, () => {
         console.log(`Server listening on port ${port}`);
     });
+})
+    .catch((error) => {
+    console.error("Error synchronizing database:", error);
 });
 //# sourceMappingURL=index.js.map

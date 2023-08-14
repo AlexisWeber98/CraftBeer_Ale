@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../../db");
 const logIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { password, email } = req.body;
+        const { password, email } = req.query;
         if (!email)
             return res.status(400).json({ message: "email is required" });
         else if (!password)

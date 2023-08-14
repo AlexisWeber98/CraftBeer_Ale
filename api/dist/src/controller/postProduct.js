@@ -8,28 +8,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../../db");
+const postProductValidations_1 = __importDefault(require("../validations/postProductValidations"));
 const postProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name, image, type, ABV, description, price, stock, IBU, presentation, UserCompanyId, } = req.body;
-        if (!name)
-            return res.status(400).json({ message: "name is required" });
-        if (!image)
-            return res.status(400).json({ message: "image is required" });
-        if (!type)
-            return res.status(400).json({ message: "type is required" });
-        if (!ABV)
-            return res.status(400).json({ message: "ABV is required" });
-        if (!description)
-            return res.status(400).json({ message: "description is required" });
-        if (!price)
-            return res.status(400).json({ message: "price is required" });
-        if (!stock)
-            return res.status(400).json({ message: "stock is required" });
-        if (!presentation)
-            return res.status(400).json({ message: "presentation is required" });
-        const company = yield db_1.UserCompany.findByPk(UserCompanyId);
+        const { name, image, type, ABV, description, price, stock, IBU, presentation, userCompanyId, } = req.body;
+        const errors = (0, postProductValidations_1.default)(name, image, type, ABV, description, price, stock, IBU, presentation, userCompanyId);
+        if (errors)
+            return res.status(400).json({ message: errors });
+        const company = yield db_1.UserCompany.findByPk(userCompanyId);
         if (!company) {
             return res.status(404).json({ message: "Company not found" });
         }
@@ -44,9 +35,10 @@ const postProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             presentation,
             IBU,
             status: true,
-            UserCompanyId
+            userCompanyId
         });
-        res.status(200).json(product);
+        company.addProduct(product);
+        res.status(200).json(Object.assign(Object.assign({}, product.get({ plain: true })), { userCompanyId }));
     }
     catch (error) {
         if (error instanceof Error) {

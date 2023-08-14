@@ -8,36 +8,43 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../../db");
+const postUserValidations_1 = __importDefault(require("../validations/postUserValidations"));
+const postAccountConfirm_1 = __importDefault(require("../controller/postAccountConfirm"));
 const postUserPerson = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name, lastName, document, email, password, address, image, role, country, city, state } = req.body;
-        if (!name)
-            return res.status(400).json({ message: "name is required" });
-        if (!lastName)
-            return res.status(400).json({ message: "lastName is require" });
-        if (!document)
-            return res.status(400).json({ message: "document is required" });
-        if (!email)
-            return res.status(400).json({ message: "email is equired" });
-        if (!password)
-            return res.status(400).json({ message: "password is required" });
+        const { name, lastName, document, email, password, address, image, country, city, state } = req.body;
+        const errors = (0, postUserValidations_1.default)(name, lastName, document, email, password, address, image, country, city, state);
+        if (errors)
+            return res.status(400).json({ message: errors });
+        if (email) {
+            const EmailUnique = yield db_1.UserCompany.findOne({ where: { email: email } });
+            if (EmailUnique)
+                return res.status(400).json({ message: "This email is already registered" });
+        }
         const userPerson = yield db_1.UserPerson.create({
             name,
             lastName,
             document,
             email,
             password,
-            country,
-            city,
-            state,
             address,
             image,
             status: true,
-            role: "Person"
+            country,
+            city,
+            state,
+            role: "Person",
         });
-        return res.status(200).json(userPerson);
+        if (userPerson) {
+            (0, postAccountConfirm_1.default)(name, email);
+        }
+        console.log("creacion exitosa");
+        return res.status(200).send("usuario creado exitosamente");
     }
     catch (error) {
         if (error instanceof Error) {

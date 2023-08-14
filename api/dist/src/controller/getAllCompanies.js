@@ -15,6 +15,12 @@ const getAllCompanies = (req, res) => __awaiter(void 0, void 0, void 0, function
     try {
         const { name } = req.query;
         let companies;
+        const includeOptions = [
+            {
+                model: db_1.Product,
+                as: 'products',
+            },
+        ];
         if (name) {
             companies = yield db_1.UserCompany.findAll({
                 where: {
@@ -22,18 +28,18 @@ const getAllCompanies = (req, res) => __awaiter(void 0, void 0, void 0, function
                         [sequelize_1.Op.iLike]: `%${name}%`
                     }
                 },
-                include: [{ model: db_1.Product, as: 'products' }]
+                include: [includeOptions],
             });
         }
         else {
             companies = yield db_1.UserCompany.findAll({
-                include: [{ model: db_1.Product, as: 'products' }]
+                include: [includeOptions],
             });
         }
         return res.status(200).send(companies);
     }
     catch (error) {
-        return res.status(400).send({ error });
+        return res.status(400).send(error);
     }
 });
 exports.default = getAllCompanies;

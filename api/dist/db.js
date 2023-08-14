@@ -25,14 +25,6 @@ fs_1.default.readdirSync(path_1.default.join(__dirname, "src/models"))
     modelDefiners.push(modelDefiner.default);
 });
 modelDefiners.forEach((modelDefiner) => modelDefiner(sequelize));
-sequelize
-    .sync({ alter: true })
-    .then(() => {
-    console.log("Database synchronized");
-})
-    .catch((error) => {
-    console.error("Error synchronizing database:", error);
-});
 const upperCaseModels = {};
 Object.entries(sequelize.models).forEach(([name, model]) => {
     const upperCaseName = name[0].toUpperCase() + name.slice(1);

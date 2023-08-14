@@ -10,7 +10,7 @@ const server = express();
 const routes = require("./routes/index.ts");
 server.use(express.json());
 server.use(body_parser_1.default.urlencoded({ extended: true, limit: "50mb" }));
-server.use(body_parser_1.default.json({ limit: "50mb" }));
+server.use(body_parser_1.default.json());
 server.use((0, cookie_parser_1.default)());
 server.use((0, morgan_1.default)("dev"));
 server.use((req, res, next) => {

@@ -10,11 +10,11 @@ const defineModel = () => {
             defaultValue: sequelize_1.DataTypes.UUIDV4,
         },
         amount: {
-            type: sequelize_1.DataTypes.INTEGER,
+            type: sequelize_1.DataTypes.FLOAT,
             allowNull: false,
         },
         totalPrice: {
-            type: sequelize_1.DataTypes.INTEGER,
+            type: sequelize_1.DataTypes.FLOAT,
             allowNull: false,
         },
     });

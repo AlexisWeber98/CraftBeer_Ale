@@ -14,7 +14,7 @@ const defineModel = () => {
             allowNull: false,
         },
         totalPrice: {
-            type: sequelize_1.DataTypes.INTEGER,
+            type: sequelize_1.DataTypes.FLOAT,
             allowNull: false,
         },
     });

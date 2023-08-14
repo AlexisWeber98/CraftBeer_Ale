@@ -10,17 +10,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../../db");
-const getAllUserPersons = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const db_2 = require("../../db");
+const getShoppingHistories = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const users = yield db_1.UserPerson.findAll();
-        if (!users) {
-            return res.status(404).send({ message: "Users not found." });
+        const { userPersonId } = req.query;
+        if (!userPersonId) {
+            return res.status(404).json({ error: 'Parameter userPersonId not found.' });
         }
-        return res.status(200).json(users);
+        const shoppingHistories = yield db_1.ShoppingHistory.findAll({
+            where: { userPersonId },
+            include: [{ model: db_2.Item }],
+        });
+        return res.status(200).json(shoppingHistories);
     }
     catch (error) {
-        return res.status(500).send({ message: "Internal Server Error." });
+        console.error('Error getting shoppingHistories:', error);
+        return res.status(500).json({ error: 'Internal server error.' });
     }
 });
-exports.default = getAllUserPersons;
-//# sourceMappingURL=getAllUserPersons.js.map
+exports.default = getShoppingHistories;
+//# sourceMappingURL=getShoppingHistories.js.map
