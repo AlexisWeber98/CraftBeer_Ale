@@ -23,7 +23,7 @@ import {
   TOTAL_PAGES,
   LOGIN_VERIFICATION,
   LOGOUT,
-  URL_IMAGE
+  URL_IMAGE,
 } from "../redux/actions/actionsTypes";
 import { SaveDataLS } from "../components/LocalStorage/LocalStorage";
 
@@ -42,7 +42,7 @@ export interface beers {
   description: string;
   id: string;
   image: string;
-  name: string
+  name: string;
   presentation: string;
   price: number;
   qualification?: null;
@@ -55,39 +55,41 @@ export interface beers {
 export interface AppState {
   allBeer: beers[];
   beerFilters: BeerFilters;
-  localStorageCart:SaveDataLS [];
-  totalPages:number
-  allCompany: object[]
+  localStorageCart: SaveDataLS[];
+  totalPages: number;
+  allCompany: object[];
   accessLogin: AccessLogin;
-  urlImage: string
+  urlImage: string;
 }
 export interface BeerFilters {
-  IBU?: number,  // El signo de interrogación indica que la propiedad es opcional
-  AVB?: number,
-  name?:String,
-  pag?:Number,
+  IBU?: number; // El signo de interrogación indica que la propiedad es opcional
+  AVB?: number;
+  name?: String;
+  pag?: Number;
   price?: number;
-  qualification?:String,
-  type?:String,
-  order?:String,
+  qualification?: String;
+  type?: String;
+  order?: String;
 }
 
-//hidratar el estado localStorageCart desde la storage 
-const dataStorage = Object.keys(localStorage).map(key => JSON.parse(localStorage[key]));
+//hidratar el estado localStorageCart desde la storage
+const dataStorage = Object.keys(localStorage).map((key) =>
+  JSON.parse(localStorage[key])
+);
 
 export const initialState: AppState = {
   allBeer: [],
   beerFilters: {},
-  localStorageCart:dataStorage,
-  totalPages:0,
+  localStorageCart: dataStorage,
+  totalPages: 0,
   allCompany: [],
   accessLogin: {
     access: false,
     id: "",
     role: "",
-    cart: {...localStorage}
+    cart: { ...localStorage },
   },
-  urlImage: ""
+  urlImage: "",
 };
 
 const rootReducer = (
@@ -105,13 +107,13 @@ const rootReducer = (
       return productCreated(state);
     }
     case CREATED_COMPANY: {
-      return postCompany(state)
+      return postCompany(state);
     }
     case CREATED_USER: {
-      return userCreated(state)
-    };
+      return userCreated(state);
+    }
     case LOCAL_STORAGE: {
-      return saveLocalStorageCart(state,action);
+      return saveLocalStorageCart(state, action);
     }
     case LOGIN: {
       return login(state, action);
@@ -120,13 +122,13 @@ const rootReducer = (
       return logout(state);
     }
     case TOTAL_PAGES: {
-      return totalPagesShop (state,action);
+      return totalPagesShop(state, action);
     }
     case LOGIN_VERIFICATION: {
-      return loginVerification (state, action)
+      return loginVerification(state, action);
     }
     case URL_IMAGE: {
-      return urlImage(state, action)
+      return urlImage(state, action);
     }
 
     default:

@@ -18,7 +18,7 @@ export const DragAndDrop = () => {
   const onUpload = async () => {
     setLoading(true);
     const url = await fileUpload(images[0].file!);
-    console.log(typeof(url));
+    console.log(typeof url);
     await dispatch(uploadImage(url));
     setLoading(false);
 
@@ -34,8 +34,7 @@ export const DragAndDrop = () => {
         multiple={false}
         maxNumber={1}
         value={images}
-        onChange={handleChange}
-      >
+        onChange={handleChange}>
         {({
           imageList,
           onImageUpload,
