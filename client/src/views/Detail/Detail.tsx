@@ -27,7 +27,7 @@ const Detail = () => {
   useEffect(() => {
     const fetchBeer = async () => {
       try {
-        const response = await axios.get(`https://craftbeer.up.railway.app/product/${id}`);
+        const response = await axios.get( `https://craftbeer.up.railway.app/product/${id}` || `https://localhost:3001product/${id}` );
         setBeer(response.data);
       } catch (error) {
         console.log(error);
@@ -96,9 +96,6 @@ const Detail = () => {
         </Col>
         <Col md={6} className={styles.imageContainer}>
           <img src={beer?.image} alt="" className={styles.image} />
-          <Button className={styles.addButton}>
-            Añadir al carrito
-          </Button>
         </Col>
       </Row>
     </Container>

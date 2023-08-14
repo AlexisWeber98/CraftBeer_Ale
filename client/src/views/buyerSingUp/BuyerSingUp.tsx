@@ -6,6 +6,7 @@ import craftBeerLogo from "../../assets/img/craftBeerLogo.jpg";
 import Styles from "./BuyerSingUp.module.css"
 interface UserData {
   name: string;
+  id?: string;
   lastName: string;
   document: number;
   email: string;
@@ -15,8 +16,6 @@ interface UserData {
   state: string;
   address: string;
   image: string;
-  status: string;
-  role: string;
 }
 const BuyerSingUp: React.FC = () => {
   const dispatch = useDispatch<any>();
@@ -31,8 +30,7 @@ const BuyerSingUp: React.FC = () => {
     state: "",
     address: "",
     image: "",
-    status: "",
-    role: ""
+   
   });
   const [errors, setErrors] = useState({
     name: "Se requiere nombre",
@@ -99,49 +97,48 @@ const BuyerSingUp: React.FC = () => {
     }
   
   
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | any) => {
+      const { name, value } = event.target;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+      validation({ [name]: value }, name);
+    };
+
+    const disable = (errors:{ [key: string]: string }): boolean => {
+      let disabled = true;
+      for (let error in errors) {
+        if (errors[error] === "") disabled = false;
+        else {
+          disabled = true;
+          break;
+        }
+      }
+      return disabled;
+    };
+    // console.log(formData);
+
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-    //  console.log(formData)
-
-
-  console.log(formData)
-  dispatch(createdUser(formData))
-  // setFormData({
-  //   name: "",
-  //   lastName: "",
-  //   document: 0,
-  //   email: "",
-  //   password: "",
-  //   country: "",
-  //   city: "",
-  //   state: "",
-  //   address: "",
-  //   image: "",
-  //   status: "",
-  //   role: ""
-  // });
-};
+      console.log(formData);
+      dispatch(createdUser(formData));
+      setFormData({
+        name: "",
+        lastName: "",
+        document: 0,
+        email: "",
+        password: "",
+        country: "",
+        city: "",
+        state: "",
+        address: "",
+        image: "",
+      });
+    };
 
 // console.log(formData);
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | any) => {
-    const { name, value } = event.target;
-    setFormData({...formData,[name]: value,});
-    validation({...formData, [name]: value}, name);
-  };
-  const disable = (errors:{ [key: string]: string }): boolean => {
-    let disabled = true;
-    for (let error in errors) {
-      if (errors[error] === "") disabled = false;
-      else {
-        disabled = true;
-        break;
-      }
-    }
-    return disabled;
-  };
-  // console.log(formData);
 
 
 
@@ -151,7 +148,7 @@ const BuyerSingUp: React.FC = () => {
       <div className={Styles.formBox}>
       <Form  onSubmit={handleSubmit} style={{ width: "700px", height: "auto", padding: "10px" }}>
   <Row style={{ margin: '15px' }}>
-    <Col>
+    <Col >
       Nombre:
       <Form.Control
         placeholder="Nombre"
@@ -285,7 +282,7 @@ const BuyerSingUp: React.FC = () => {
 
     </div>
     <Row className={Styles.imageContainer}>
-        <Col >
+        <Col  className={Styles.imageCol}>
           <img className={Styles.image} src={craftBeerLogo} alt="" />
         </Col>
     </Row>

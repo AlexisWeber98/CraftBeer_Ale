@@ -1,6 +1,6 @@
 //import { Dispatch, Action } from "redux";
 import axios from "axios";
-import toast from "react-hot-toast";
+import toast from 'react-hot-toast'
 import { AnyAction, Dispatch } from "redux";
 import {
   CREATED_PRODUCT,
@@ -13,8 +13,10 @@ import {
   TOTAL_PAGES,
   LOGIN_VERIFICATION,
   LOGOUT,
+  URL_IMAGE,
 } from "../actions/actionsTypes";
 import { saveUserData } from "../../components/LocalStorage/LocalStorage";
+import { log } from "console";
 //interface para las Actions
 export interface ActionWithPayload<T, P> {
   type: T;
@@ -29,7 +31,7 @@ export interface ProductData {
   stock: number;
   IBU: number;
   presentation: string;
-  image: string;
+  image: string
   userCompanyId: any;
 }
 
@@ -51,11 +53,7 @@ export interface CompanyData {
 //Actions para recibir todas las cervezas
 export const allBeers = () => {
   const endpoint = "/product";
-<<<<<<< HEAD
-  return async function (dispatch: Dispatch<any>) {
-=======
     return async function (dispatch: Dispatch<any>) {
->>>>>>> c63d64163749f902f9280a4bf2068b23707322a4
     const response = await axios.get(endpoint);
     return dispatch({
       type: ADD_ALL_BEER,
@@ -106,11 +104,7 @@ export const createdProduct = ({
 }: ProductData) => {
   
   return async function (dispatch: any) {
-<<<<<<< HEAD
-    try {
-=======
   try {
->>>>>>> c63d64163749f902f9280a4bf2068b23707322a4
       let createdBeer = await axios.post(`/product`, {
         name,
         image,
@@ -168,18 +162,21 @@ export const createdCompany = ({
       dispatch({
         type: CREATED_COMPANY,
         payload: companyCreated,
-      });
-      //alert("Se creo correctamente su compañía")
-      toast.success("Se creo correctamente su compañía");
+      });      
+      toast.success("Se creo correctamente su compañía")
+      setTimeout(()=>{
+        window.location.href = "/login"
+
+      }, 2000)
     };
   } catch (error) {
-    //alert("No ha sido posible cargar su compañía")
-    toast.error("No ha sido posible cargar su compañía");
-  }
+   toast.error("No ha sido posible cargar su compañía");
+  }  
 };
 
 export interface UserData {
   name: string;
+  id?: string;
   lastName: string;
   document: number;
   email: string;
@@ -191,18 +188,25 @@ export interface UserData {
 }
 //action crear user comprador
 export const createdUser = (userData: UserData) => {
-  try {
-    return async function (dispatch: Dispatch<any>) {
-      let createdUser = await axios.post(`/user`, userData);
+  return (async (dispatch: Dispatch<any>) => {
+    try {
+  
+      toast.success("Usuario creado exitosamente")
+      let createdUserResponse = await axios.post("/user", userData);
       dispatch({
         type: CREATED_USER,
-        payload: createdUser,
+        payload: createdUserResponse.data,
       });
-      toast.success("Usuario creado exitosamente");
-    };
-  } catch (error) {
-    toast.error("Error al crear usuario");
+      setTimeout(()=>{
+        window.location.href = "/login"
+
+      },2000)
+      
+    } catch (error) {
+      toast.error("Error al crear usuario");
+    }
   }
+  )
 };
 
 /// LOGIN ____________________________________________________________________________________________
@@ -261,15 +265,14 @@ export const login = (loginUserData: loginUserData) => {
 };
 // LOGIN ACTION
 export const logout = () => {
-  toast.success("Logout successful");
   return {
     type: LOGOUT,
   };
 };
 
-export const verificationLogin = (user: any) => {
-  return {
-    type: LOGIN_VERIFICATION,
-    payload: user,
-  };
-};
+export const verificationLogin = (user:any)=>{
+ return {
+  type: LOGIN_VERIFICATION,
+  payload: user
+ } 
+}
