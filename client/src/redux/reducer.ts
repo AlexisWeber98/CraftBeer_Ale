@@ -59,7 +59,11 @@ export interface AppState {
   totalPages: number;
   allCompany: object[];
   accessLogin: AccessLogin;
+<<<<<<< HEAD
   urlImage: string;
+=======
+  urlImage: any;
+>>>>>>> e86a87192ca59191ba092b2253a9ebb7ea4f1157
 }
 export interface BeerFilters {
   IBU?: number; // El signo de interrogación indica que la propiedad es opcional
@@ -72,10 +76,16 @@ export interface BeerFilters {
   order?: String;
 }
 
+<<<<<<< HEAD
 //hidratar el estado localStorageCart desde la storage
 const dataStorage = Object.keys(localStorage).map((key) =>
   JSON.parse(localStorage[key])
 );
+=======
+//hidratar el estado localStorageCart desde la storage 
+const dataStorage = Object.keys(localStorage).map((key) =>   JSON.parse(localStorage[key]));
+console.log("fadfsf",dataStorage);
+>>>>>>> e86a87192ca59191ba092b2253a9ebb7ea4f1157
 
 export const initialState: AppState = {
   allBeer: [],

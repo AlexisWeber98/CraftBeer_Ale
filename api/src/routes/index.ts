@@ -15,6 +15,8 @@ import {createOrder} from "../controller/payment/create-order"
 import postShoppingHistory from '../controller/postShoppingHistory';
 import getShoppingHistories from '../controller/getShoppingHistories';
 import recibeWebHook from '../controller/payment/get.Webhook';
+import getPersonById from '../controller/getPersonById';
+import postContactMe from "../controller/postContactMe";
 
 const router = Router();
 
@@ -22,8 +24,9 @@ const router = Router();
 router.post("/user", postUserPerson);
 router.post("/company", postCompany);
 router.post("/product", postProduct);
-router.post("/qualification", postQualification)
+router.post("/qualification", postQualification);
 router.post("/shoppingHistory", postShoppingHistory);
+router.post("/contactme", postContactMe)
 
 
 // ------- get routes ------- //
@@ -33,6 +36,7 @@ router.get("/product", getAllProducts);
 router.get("/login", logIn);
 router.get("/persons", getAllUserPersons);
 router.get("/shoppingHistories", getShoppingHistories);
+router.get("/persons/:idPerson", getPersonById);
 
 // ------- update routes-------//
 router.put("/user", putUserPerson);
