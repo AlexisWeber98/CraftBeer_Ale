@@ -14,9 +14,10 @@ import {
   LOGIN_VERIFICATION,
   LOGOUT,
   URL_IMAGE,
+  HAS_NAVIGATED,
+  DELETE_CARTSTORAGE,
 } from "../actions/actionsTypes";
 import { saveUserData } from "../../components/LocalStorage/LocalStorage";
-
 
 //interface para las Actions
 export interface ActionWithPayload<T, P> {
@@ -37,6 +38,7 @@ export interface ProductData {
 }
 
 export interface CompanyData {
+  id?: string;
   name: string;
   lastName: string;
   document: number;
@@ -77,18 +79,12 @@ export const orderFilters = (
 export const localStorageCart = (data: object) => {
   return {
     type: LOCAL_STORAGE,
-    payload: data,
-  };
-};
+    payload:data
+  }
+}
 
-<<<<<<< HEAD
 //actions para guardar el localStorage
-
 export const totalPages = (data: number) => {
-=======
-//actions para guardar el localStorage 
-export const totalPages = (data:number)=>{
->>>>>>> e86a87192ca59191ba092b2253a9ebb7ea4f1157
   return {
     type: TOTAL_PAGES,
     payload: data,
@@ -127,29 +123,23 @@ export const createdProduct = ({
         payload: createdBeer,
       });
       console.log(createdBeer);
-<<<<<<< HEAD
       toast.success("Se creo correctamente su producto");
       setTimeout(() => {
         window.location.href = "/home";
       }, 2000);
-    } catch (error) {
-      toast.error("No ha sido posible cargar su producto");
+    } catch (error: any) {
+      if (error.response.data.message === undefined)
+        toast.error(
+          `No ha sido posible cargar su compañía\n\n${error.response.data}`
+        );
+      else {
+        toast.error(
+          `No ha sido posible cargar su compañía\n\n${error.response.data.message}`
+        );
+      }
+      console.log(error.response.data);
     }
   };
-=======
-      toast.success("Se creo correctamente su producto")
-      setTimeout(()=>{
-        window.location.href = "/home"
-      }, 2000)
-    } 
-    
-    catch (error:any) {
-      if(error.response.data.message === undefined) toast.error(`No ha sido posible cargar su compañía\n\n${error.response.data}`)
-      else {toast.error(`No ha sido posible cargar su compañía\n\n${error.response.data.message}`)}
-      console.log(error.response.data);
-    };
-  }
->>>>>>> e86a87192ca59191ba092b2253a9ebb7ea4f1157
 };
 
 //Actions para crear un usuario de vendedor (postCompany)
@@ -168,7 +158,7 @@ export const createdCompany = ({
   image,
 }: CompanyData) => {
   return async function (dispatch: AnyAction | any) {
-  try {
+    try {
       let companyCreated = await axios.post(`/company`, {
         name,
         lastName,
@@ -187,28 +177,24 @@ export const createdCompany = ({
         type: CREATED_COMPANY,
         payload: companyCreated,
       });
-<<<<<<< HEAD
+
       toast.success("Se creo correctamente su compañía");
-      setTimeout(() => {
-        window.location.href = "/login";
-      }, 2000);
-    };
-  } catch (error) {
-    toast.error("No ha sido posible cargar su compañía");
-  }
-=======
-      
-      toast.success("Se creo correctamente su compañía")
       // setTimeout(()=>{
       //   window.location.href = "/login"
       // }, 2000)
     } catch (error: any) {
-      if(error.response.data.message === undefined) toast.error(`No ha sido posible cargar su compañía\n\n${error.response.data}`)
-      else {toast.error(`No ha sido posible cargar su compañía\n\n${error.response.data.message}`)}
+      if (error.response.data.message === undefined)
+        toast.error(
+          `No ha sido posible cargar su compañía\n\n${error.response.data}`
+        );
+      else {
+        toast.error(
+          `No ha sido posible cargar su compañía\n\n${error.response.data.message}`
+        );
+      }
       console.log(error.response.data);
-    };
-  }  
->>>>>>> e86a87192ca59191ba092b2253a9ebb7ea4f1157
+    }
+  };
 };
 
 export interface UserData {
@@ -227,17 +213,15 @@ export interface UserData {
 export const createdUser = (userData: UserData) => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      toast.success("Usuario creado exitosamente");
       let createdUserResponse = await axios.post("/user", userData);
       dispatch({
         type: CREATED_USER,
         payload: createdUserResponse.data,
       });
-
-      toast.success("Usuario creado exitosamente");
-      setTimeout(() => {
-        window.location.href = "/login";
-      }, 2000);
+      toast.success("Usuario creado exitosamente")
+      setTimeout(()=>{
+        window.location.href = "/login"
+      }, 2000)
     } catch (error) {
       toast.error("Error al crear usuario");
     }
@@ -312,9 +296,46 @@ export const verificationLogin = (user: any) => {
   };
 };
 
-export const uploadImage = (url: any)=> {
+export const uploadImage = (url: any) => {
   return {
     type: URL_IMAGE,
     payload: url
   }
 }
+
+export const hasNavigatedTrue = () => {
+  return {
+    type: HAS_NAVIGATED
+  }
+}
+
+//Delete cart 
+
+export const deleteCartStorage =()=>{
+  return {
+    type: DELETE_CARTSTORAGE
+  }
+}
+
+// CONTACT
+export interface message {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+}
+export const contactMessage = async (messageInfo: message) => {
+  try {
+    await axios.post("/contactme", messageInfo)
+    toast.success("message sent successfully")
+  } catch (error: any) {
+    if (error.response && error.response.data && error.response.data.message) {
+      const errorMessage = error.response.data.message;
+      toast.error(errorMessage);
+    } else {
+    toast.error("an error occurred while sending message");
+    }
+  }
+}
+
+

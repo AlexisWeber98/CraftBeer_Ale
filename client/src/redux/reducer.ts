@@ -11,6 +11,8 @@ import {
   loginVerification,
   logout,
   urlImage,
+  hasNavigatedTrue,
+  deleteStorageCart,
 } from "./reducerFunctions";
 import {
   CREATED_PRODUCT,
@@ -24,6 +26,8 @@ import {
   LOGIN_VERIFICATION,
   LOGOUT,
   URL_IMAGE,
+  HAS_NAVIGATED,
+  DELETE_CARTSTORAGE,
 } from "../redux/actions/actionsTypes";
 import { SaveDataLS } from "../components/LocalStorage/LocalStorage";
 
@@ -59,11 +63,8 @@ export interface AppState {
   totalPages: number;
   allCompany: object[];
   accessLogin: AccessLogin;
-<<<<<<< HEAD
   urlImage: string;
-=======
-  urlImage: any;
->>>>>>> e86a87192ca59191ba092b2253a9ebb7ea4f1157
+  hasNavigated: boolean;
 }
 export interface BeerFilters {
   IBU?: number; // El signo de interrogación indica que la propiedad es opcional
@@ -76,16 +77,9 @@ export interface BeerFilters {
   order?: String;
 }
 
-<<<<<<< HEAD
-//hidratar el estado localStorageCart desde la storage
-const dataStorage = Object.keys(localStorage).map((key) =>
-  JSON.parse(localStorage[key])
-);
-=======
 //hidratar el estado localStorageCart desde la storage 
 const dataStorage = Object.keys(localStorage).map((key) =>   JSON.parse(localStorage[key]));
 console.log("fadfsf",dataStorage);
->>>>>>> e86a87192ca59191ba092b2253a9ebb7ea4f1157
 
 export const initialState: AppState = {
   allBeer: [],
@@ -100,6 +94,7 @@ export const initialState: AppState = {
     cart: { ...localStorage },
   },
   urlImage: "",
+  hasNavigated: false,
 };
 
 const rootReducer = (
@@ -125,6 +120,12 @@ const rootReducer = (
     case LOCAL_STORAGE: {
       return saveLocalStorageCart(state, action);
     }
+    case DELETE_CARTSTORAGE :{
+      return deleteStorageCart(state)
+    }
+    case DELETE_CARTSTORAGE :{
+      return deleteStorageCart(state)
+    }
     case LOGIN: {
       return login(state, action);
     }
@@ -140,7 +141,9 @@ const rootReducer = (
     case URL_IMAGE: {
       return urlImage(state, action);
     }
-
+    case HAS_NAVIGATED: {
+      return hasNavigatedTrue(state)
+    }
     default:
       return state;
   }
