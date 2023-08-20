@@ -25,6 +25,7 @@ import DetailSeller from "./views/Admin/DetailSeller";
 // import PayCart from './views/Pay/Pay';
 import MyShop from "./views/MyShop/MyShop";
 import Error from "./views/Error/Error";
+import ProductsBySeller from "./views/Admin/ProductsBySeller"
 // COMPONENTS
 import NavBar from "./components/navbar/NavBar";
 import Footer from "./components/footer/Footer";
@@ -33,6 +34,9 @@ import Succes from "./components/Succes/Succes";
 import { hasNavigatedTrue, verificationLogin } from "./redux/actions/actions";
 // STYLES
 import "./App.css";
+import AdminHistoryShop from "./views/Admin/AdminHistoryShop/adminHistoryShop";
+import Pending from "./components/Pending/Pending";
+import AdminUserModify from "./views/Admin/AdminUserModify/AdminUserModify";
 
 // APP
 function App() {
@@ -107,6 +111,13 @@ function App() {
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<Error />} />
+            <Route path="/admin" element={<Administrador />} />
+            <Route path="/admin/buyer/:id" element={<DetailBuyer />} />
+            <Route path="/admin/seller/:id" element={<DetailSeller />} />
+            <Route path="/admin/buyer/historyShop" element={<AdminHistoryShop/>} />
+            <Route path="/admin/buyer/adminUserModify" element={<AdminUserModify/>} />
+
+            <Route path="*" element={<Error />} />
           </Routes>
         ) : accessLogin.role === "Person" ? (
           <Routes>
@@ -120,6 +131,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/myShop" element={<MyShop />} />
             <Route path="/succes" element={<Succes />} />
+            <Route path="/pending" element={<Pending/>} />
             <Route path="*" element={<Error />} />
           </Routes>
         ) : (accessLogin.role === "Company" ? (
@@ -146,6 +158,9 @@ function App() {
             <Route path="/admin" element={<Administrador />} />
             <Route path="/admin/buyer/:id" element={<DetailBuyer />} />
             <Route path="/admin/seller/:id" element={<DetailSeller />} />
+            <Route path="/adminHistoryShop" element={<AdminHistoryShop />} />
+            <Route path="/admin/seller/products" element={<ProductsBySeller/>} />
+            <Route path="/admin/buyer/adminUserModify" element={<ProductsBySeller/>} />
             <Route path="*" element={<Error />} />
           </Routes>
         ) : null))}
