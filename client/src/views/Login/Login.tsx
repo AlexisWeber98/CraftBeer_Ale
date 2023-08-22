@@ -164,6 +164,100 @@ const Login: React.FC = () => {
       </Form>
     </div>
   );
+
+  return (
+    <div className={styles.all}>
+      <div
+        className={
+          !isError
+            ? !isClicked
+              ? styles.avatarCont
+              : styles.avatarContSubmit
+            : styles.avatarContError
+        }>
+        <img src={avatar} alt="avatar" className={styles.avatar} />
+      </div>
+      <Form
+        className={
+          !isError
+            ? !isClicked
+              ? styles.form
+              : styles.formSubmit
+            : styles.formError
+        }
+        onSubmit={handlerOnSubmit}>
+        <Form.Group
+          className={`${errors.email ? styles.inputError1 : styles.input1}`}>
+          <div>
+            <img src={email} alt="email" />
+          </div>
+          <Form.Control
+            required
+            type="email"
+            name="email"
+            placeholder="Enter email"
+            onChange={handlerOnChange}
+          />
+        </Form.Group>
+        {errors.email && (
+          <p className={styles.validationMessage}>{errors.email}</p>
+        )}
+        <Form.Group
+          className={`${errors.password ? styles.inputError : styles.input}`}>
+          <div>
+            <img src={password} alt="password" />
+          </div>
+          <Form.Control
+            required
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Password"
+            onChange={handlerOnChange}
+          />
+        </Form.Group>
+        {errors.password && (
+          <p className={styles.validationMessage}>{errors.password}</p>
+        )}
+        <label className={styles.label}>
+          We'll never share your password with anyone else.
+        </label>
+        <Form.Group className={styles.checks}>
+          <Form.Check
+            type="checkbox"
+            label="Check me out"
+            onChange={handlerCheck}
+          />
+          <NavLink to="/home" className={styles.forgot}>
+            Forgot Password?
+          </NavLink>
+        </Form.Group>
+        <button
+          type="submit"
+          className={styles.submit}
+          disabled={
+            !userLogin.email ||
+            !userLogin.password ||
+            !!errors.email ||
+            !!errors.password
+          }>
+          Submit
+        </button>
+        <NavLink to="/chooseSignUp">
+          <button className={styles.signUp}>Sign Up</button>
+        </NavLink>
+        <GoogleOAuthProvider clientId="613986479282-t9j4clt86pdii5h3m22abarctpm7k3d7.apps.googleusercontent.com">
+          <GoogleLogin
+            onSuccess={(credentialResponse: any) => {
+              console.log(credentialResponse);
+            }}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          />
+        </GoogleOAuthProvider>
+      </Form>
+    </div>
+  );
 };
 
 export default Login;
