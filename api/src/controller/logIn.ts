@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { UserCompany, UserPerson } from "../../db";
 
+
 const logIn = async (req: Request, res: Response) => {
   try {
     const { password, email, email_verified } = req.query;
@@ -48,4 +49,3 @@ const logIn = async (req: Request, res: Response) => {
 };
 
 export default logIn;
-
