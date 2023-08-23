@@ -13,7 +13,7 @@ const logIn = async (req: Request, res: Response) => {
     if (verified === "true") {
       null;
     } else if (!password) {
-      return res.status(400).json({ message: "Password is required" });
+      return res.status(401).json({ message: "Password is required" });
     }
 
     const findUser = await UserPerson.findOne({ where: { email } });
@@ -33,7 +33,7 @@ const logIn = async (req: Request, res: Response) => {
           if (findUser.password === password) {
             return res.status(200).json({ access: true, user: findUser });
           } else {
-            return res.status(400).json({ message: "invalid password" });
+            return res.status(405).json({ message: "invalid password" });
           }
         }
       }
@@ -47,7 +47,7 @@ const logIn = async (req: Request, res: Response) => {
           if (findCompany.password === password) {
             return res.status(200).json({ access: true, user: findCompany });
           } else {
-            return res.status(400).json({ message: "invalid password" });
+            return res.status(405).json({ message: "invalid password" });
           }
         }
       }
