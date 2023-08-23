@@ -12,14 +12,15 @@ import { useSelector } from "react-redux";
 import { AppState } from "../../redux/reducer";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 const DetailSeller = () => {
   const id = useSelector((state: AppState) => state.idSeller);
+  const navigate = useNavigate()
 
   const [infoUser, setInfoUser] = useState<any>({});
-  console.log(infoUser);
+  console.log("data Sellerrrrrrr",infoUser);
     
 
   useEffect(() => {
@@ -55,6 +56,12 @@ const DetailSeller = () => {
     }
   };
 
+
+  const historyShop =(eventKey:any)=>{
+    if(eventKey === "1")  navigate(`/admin/seller/AdminHistoryShopSeller`)
+    if(eventKey === "2")  navigate(`/admin/buyer/adminUserModify`)
+    }
+
   return (
     <div className="bodyBuyer">
       <Card
@@ -77,10 +84,10 @@ const DetailSeller = () => {
           <NavbarBrand>
             <h2>{infoUser.company}</h2>
           </NavbarBrand>
-          <NavDropdown title="Otras opciones" menuVariant="dark">
-            <NavDropdown.Item>Historial de ventas</NavDropdown.Item>
+          <NavDropdown title="Otras opciones" menuVariant="dark" onSelect={historyShop}>
+            <NavDropdown.Item eventKey="1">Historial de ventas</NavDropdown.Item>
             <NavDropdown.Item>
-              <Link to="/admin/seller/products">Productos en venta</Link>
+              <Link to="/admin/seller/products" style={{textDecoration:"none", color:"white"}}>Productos en venta</Link>
             </NavDropdown.Item>
             <NavDropdown.Item>Modificar usuario</NavDropdown.Item>
           </NavDropdown>
@@ -88,13 +95,13 @@ const DetailSeller = () => {
         <Row style={{ height: "100%", width: "100%", margin: "0.5%" }}>
           <Col style={{ width: "50%", height: "auto" }}>
             Nombre
-            <input type="text" className="inputBuyer" value={infoUser.name} />
+            <input type="text" className="inputSeller" value={infoUser.name} />
           </Col>
           <Col>
             Apellido
             <input
               type="text"
-              className="inputBuyer"
+              className="inputSeller"
               value={infoUser.lastName}
             />
           </Col>
@@ -102,7 +109,7 @@ const DetailSeller = () => {
             Dirección de la compañía
             <input
               type="text"
-              className="inputBuyer"
+              className="inputSeller"
               value={infoUser.address}
             />
           </Col>
@@ -110,19 +117,19 @@ const DetailSeller = () => {
         <Row style={{ height: "100%", width: "100%", margin: "0.5%" }}>
           <Col style={{ width: "50%", height: "auto" }}>
             Estado/Región/Provincia
-            <input type="text" className="inputBuyer" value={infoUser.state} />
+            <input type="text" className="inputSeller" value={infoUser.state} />
           </Col>
           <Col>
             País
             <input
               type="text"
-              className="inputBuyer"
+              className="inputSeller"
               value={infoUser.country}
             />
           </Col>
           <Col>
             Teléfono móvil
-            <input type="text" className="inputBuyer" value={infoUser.phone} />
+            <input type="text" className="inputSeller" value={infoUser.phone} />
           </Col>
         </Row>
         <Row style={{ height: "100%", width: "100%", margin: "0.5%" }}>
@@ -130,34 +137,35 @@ const DetailSeller = () => {
             Documento de identidad
             <input
               type="text"
-              className="inputBuyer"
+              className="inputSeller"
               value={infoUser.document}
             />
           </Col>
           <Col>
             Tipo de usuario
-            <input type="text" className="inputBuyer" value={infoUser.role} />
+            <input type="text" className="inputSeller" value={infoUser.role} />
           </Col>
           <Col></Col>
         </Row>
         <Row style={{ height: "100%", width: "100%", margin: "0.5%" }}>
           <Col style={{ width: "50%", height: "100%" }}>
             Ciudad
-            <input type="text" className="inputBuyer" value={infoUser.city} />
+            <input type="text" className="inputSeller" value={infoUser.city} />
           </Col>
           <Col>
             Direccion de correo
-            <input type="text" className="inputBuyer" value={infoUser.email} />
+            <input type="text" className="inputSeller" value={infoUser.email} />
           </Col>
           <Col></Col>
         </Row>
         <div className="botonesBuyer">
-          <Link to="/admin" style={{ width: "30%" }}>
+          <Link to="/admin" style={{ width: "30%", height:"70%" }}>
             <Button
               style={{
                 width: "100%",
                 backgroundColor: "#A37D34",
                 border: "none",
+                height:"100%"
               }}
             >
               Volver al Panel
@@ -165,15 +173,15 @@ const DetailSeller = () => {
           </Link>
           <Button
             onClick={handlerActive}
-            style={{ width: "15%", backgroundColor: "black", border: "none" }}
+            style={{ width: "20%", backgroundColor: "black", border: "none", height:"70%" }}
           >
             Activar Usuario
           </Button>
           <Button
             onClick={handlerInactive}
             style={{
-              width: "15%",
-              height: "auto",
+              width: "20%",
+              height: "70%",
               backgroundColor: "black",
               border: "none",
             }}
