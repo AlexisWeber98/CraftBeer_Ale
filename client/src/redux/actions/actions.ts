@@ -23,7 +23,7 @@ import {
   TOP_PRODUCT,
 } from "../actions/actionsTypes";
 import { saveUserData } from "../../components/LocalStorage/LocalStorage";
-import { salesDetail, salesSum , topProducts} from "../reducer";
+import { salesDetail, salesSum } from "../reducer";
 
 //interface para las Actions
 export interface ActionWithPayload<T, P> {
@@ -217,7 +217,8 @@ export interface UserData {
 export const createdUser = (userData: UserData) => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      let createdUserResponse = await axios.post("/user", userData);
+      const endpoint= "/user"
+      let createdUserResponse = await axios.post(endpoint, userData);
       dispatch({
         type: CREATED_USER,
         payload: createdUserResponse.data,
@@ -274,10 +275,8 @@ export const login = (loginUserData: loginUserData) => {
   try {
     const endpoint = "/login";
     return async function (dispatch: Dispatch<loginAction>) {
-      const url = `${endpoint}?email=${loginUserData.email}&password=${loginUserData.password}?&email_verified=${loginUserData.email_verified}`;
+      const url = `${endpoint}?email=${loginUserData.email}&password=${loginUserData.password}&email_verified=${loginUserData.email_verified}`;
       const { data } = await axios.get(url);
-
-      console.log(data);
 
       saveUserData(data);
       dispatch({

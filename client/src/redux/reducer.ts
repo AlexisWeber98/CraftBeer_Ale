@@ -95,7 +95,7 @@ export interface AppState {
   accessLogin: AccessLogin;
   urlImage: string;
   hasNavigated: boolean;
-  idBuyer: string;
+  idBuyer: any;
   idSeller: any;
   companySalesSum: salesSum[]
   companySalesDetail: salesDetail[];
