@@ -43,10 +43,14 @@ const Creation = () => {
     IBU: 0,
     userCompanyId: idCompany,
   });
- 
+  // USE EFFECTS
   useEffect(() => {
-    dispatch(userCompanySalesSummary(idCompany));
-  }, []);
+    const timer = setTimeout(() => {
+      dispatch(userCompanySalesSummary(idCompany));
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [idCompany, dispatch, companySalesSum]); 
+
   useEffect(() => {
     setInput((prevInput) => ({ ...prevInput, image: urlImage }));
   }, [urlImage]);
@@ -149,14 +153,14 @@ const Creation = () => {
         onSubmit={handlerSubmit}
       >
         <div className="tituloFormCreacion">
-          A continuación podrás indicar la información para la publicación de tu
-          producto:
+        Below you can indicate the information for the publication of your
+        product:
         </div>
         <Row style={{ margin: "15px" }}>
           <Col>
             <Form.Control
               name="name"
-              placeholder="Nombre del pruducto"
+              placeholder="Name of product"
               onChange={handlerChange}
             />
             <h6 className="mensajes">{errors.name}</h6>
@@ -165,8 +169,9 @@ const Creation = () => {
             <InputGroup className="mb-2">
               <Form.Control
                 onChange={handlerChange}
+
+                placeholder="Price"
                 min={0}
-                placeholder="Precio"
                 name="price"
                 type="number"
               />
@@ -222,7 +227,7 @@ const Creation = () => {
           </Col>
           <Col>
             <Form.Control
-              placeholder="Graduación alcohólica"
+              placeholder="Alcohol content"
               name="ABV"
               onChange={handlerChange}
               max={100}
@@ -238,7 +243,7 @@ const Creation = () => {
           </Col>
           <Col>
             <Form.Control
-              placeholder="Tipo de presentación"
+              placeholder="type of presentation"
               name="presentation"
               onChange={handlerChange}
             />
@@ -249,7 +254,7 @@ const Creation = () => {
           <Col>
             <Form.Control
               style={{ height: "100px" }}
-              placeholder="Descripción del producto"
+              placeholder="Product description"
               name="description"
               onChange={handlerChange}
             />
@@ -270,14 +275,14 @@ const Creation = () => {
             className="botonFormProd"
             disabled={disable(errors)}
           >
-            Cargar Producto
+            Created Product
           </Button>
         </div>
       </Form>
       <div className="bodyMisArt">
         <div>
           <span className="spamMisArt">
-            <strong>MIS ARTÍCULOS PUBLICADOS</strong>
+            <strong>MY PUBLISHED ARTICLES</strong>
           </span>
           {currentBeers.map((card: any) => (
             <CardUserProduct 
