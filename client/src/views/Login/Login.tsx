@@ -137,7 +137,7 @@ const Login: React.FC = () => {
             label="Check me out"
             onChange={handlerCheck}
           />
-          <NavLink to="/home" className={styles.forgot}>
+          <NavLink to="/forgotPassword" className={styles.forgot}>
             Forgot Password?
           </NavLink>
         </Form.Group>
@@ -152,12 +152,17 @@ const Login: React.FC = () => {
           }>
           Submit
         </button>
-        <NavLink to="/chooseSignUp">
+        <NavLink to="/chooseSignUp" className={styles.navSignUp}>
           <button className={styles.signUp}>Sign Up</button>
         </NavLink>
+        <div className={styles.googleContainer}>
+          <LoginGoogle/>
+        </div>
+        {/* <div id="google-signin-container"> */}
+        {/* <div id="google-signin-button"></div>
+        </div> */}
       </Form>
       <hr />
-        <LoginGoogle/>
     </div>
   );
 };
