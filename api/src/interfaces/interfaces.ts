@@ -1,4 +1,5 @@
-
+import { UUID } from "crypto";
+import { ShoppingHistory } from "../../db";
 import UserRole from "../emuns";
 
 export interface ProductModelInterface {
@@ -72,3 +73,9 @@ export interface ItemModelInterface {
     summary:string;
 }
 
+export interface codePasswordModelInterface{
+  email:String;
+  id:UUID;
+  code:Number;
+  type:String;
+}
