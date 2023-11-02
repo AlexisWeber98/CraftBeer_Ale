@@ -32,6 +32,6 @@
   },
   "scripts": {
     "start": "nodemon /dist/index.js",
-    "tsdev": "ts-node-dev index.ts"
+    "dev": "ts-node-dev index.ts"
   }
 }
