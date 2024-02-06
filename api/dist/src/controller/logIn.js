@@ -12,30 +12,54 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../../db");
 const logIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { password, email } = req.query;
-        if (!email)
-            return res.status(400).json({ message: "email is required" });
-        else if (!password)
-            return res.status(400).json({ message: "Password is required" });
+        const { password, email, email_verified } = req.query;
+        const verified = email_verified === null || email_verified === void 0 ? void 0 : email_verified.toString();
+        if (!email) {
+            return res.status(400).json({ message: "Email is required" });
+        }
+        if (verified === "true") {
+            null;
+        }
+        else if (!password) {
+            return res.status(401).json({ message: "Password is required" });
+        }
         const findUser = yield db_1.UserPerson.findOne({ where: { email } });
         const findCompany = yield db_1.UserCompany.findOne({ where: { email } });
         if (!findUser && !findCompany) {
-            return res.status(404).json({ message: "user not found" });
+            return res.status(404).json({ message: "User not found" });
         }
         if (findUser) {
-            if (findUser.password === password) {
-                return res.status(200).json({ access: true, user: findUser });
+            if (findUser.dataValues.status === false) {
+                return res.status(404).json({ message: "Disabled user" });
             }
             else {
-                return res.status(400).json({ message: "invalid password" });
+                if (verified === "true")
+                    return res.status(200).json({ access: true, user: findUser });
+                else {
+                    if (findUser.password === password) {
+                        return res.status(200).json({ access: true, user: findUser });
+                    }
+                    else {
+                        return res.status(405).json({ message: "invalid password" });
+                    }
+                }
             }
         }
         else if (findCompany) {
-            if (findCompany.password === password) {
-                return res.status(200).json({ access: true, user: findCompany });
+            if (findCompany.dataValues.status === false) {
+                return res.status(404).json({ message: "Disabled user" });
             }
             else {
-                return res.status(400).json({ message: "invalid password" });
+                if (verified === "true")
+                    return res.status(200).json({ access: true, user: findCompany });
+                else {
+                    if (findCompany.password === password) {
+                        return res.status(200).json({ access: true, user: findCompany });
+                    }
+                    else {
+                        return res.status(405).json({ message: "invalid password" });
+                    }
+                }
             }
         }
     }

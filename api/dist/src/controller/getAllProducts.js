@@ -13,7 +13,7 @@ const db_1 = require("../../db");
 const sequelize_1 = require("sequelize");
 const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { type, price, IBU, ABV, qualification, order, pag, name } = req.query;
+        const { type, price, IBU, ABV, qualification, order, pag, name, userCompanyId } = req.query;
         const options = {};
         if (type) {
             options.where = { type: { [sequelize_1.Op.eq]: type } };
@@ -28,12 +28,15 @@ const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function*
             options.where = Object.assign(Object.assign({}, options.where), { ABV: { [sequelize_1.Op.lte]: ABV } });
         }
         if (qualification) {
-            options.where = Object.assign(Object.assign({}, options.where), { qualification: { [sequelize_1.Op.gte]: qualification } });
+            options.where = Object.assign(Object.assign({}, options.where), { qualification: { [sequelize_1.Op.lte]: qualification } });
         }
         if (name) {
             options.where = Object.assign(Object.assign({}, options.where), { name: {
                     [sequelize_1.Op.iLike]: `%${name}%`
                 } });
+        }
+        if (userCompanyId) {
+            options.where = Object.assign(Object.assign({}, options.where), { userCompanyId: { [sequelize_1.Op.eq]: userCompanyId } });
         }
         if (order && (order === 'OrderAscPrice' || order === 'OrderDesPrice')) {
             const columnToOrderBy = order === 'OrderAscPrice' ? 'price' : [['price', 'DESC']];
@@ -42,6 +45,7 @@ const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function*
         const itemsPerPage = 8;
         const currentPage = parseInt(pag) || 1;
         const offset = (currentPage - 1) * itemsPerPage;
+        options.where = Object.assign(Object.assign({}, options.where), { status: true });
         const products = yield db_1.Product.findAll(Object.assign(Object.assign({}, options), { limit: itemsPerPage, offset: offset }));
         const totalCount = yield db_1.Product.count(options);
         const totalPages = Math.ceil(totalCount / itemsPerPage);

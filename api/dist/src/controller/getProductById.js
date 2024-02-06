@@ -15,14 +15,25 @@ const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function*
         const { idProduct } = req.params;
         const beer = yield db_1.Product.findOne({
             where: {
-                id: idProduct
-            }
+                id: idProduct,
+                status: true,
+            },
+            include: {
+                model: db_1.Qualification,
+                attributes: ["rate", "comment", "userPersonId", "id"],
+            },
         });
-        if (!beer)
-            throw new Error("this beer is not exist");
-        return res.status(200).json(beer);
+        if (!beer) {
+            return res.status(404).send("This beer does not exist");
+        }
+        const productQualification = yield Promise.all(beer.Qualifications.map((prod) => __awaiter(void 0, void 0, void 0, function* () {
+            let person = yield db_1.UserPerson.findByPk(prod.userPersonId);
+            return Object.assign(Object.assign({}, prod.get({ plain: true })), { person: person.name + " " + person.lastName });
+        })));
+        return res.status(200).json(Object.assign(Object.assign({}, beer.get({ plain: true })), { Qualifications: productQualification }));
     }
     catch (error) {
+        console.log(error);
         return res.status(500).send({ error });
     }
 });

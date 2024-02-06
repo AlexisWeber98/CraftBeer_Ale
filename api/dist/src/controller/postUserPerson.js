@@ -14,11 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../../db");
 const postUserValidations_1 = __importDefault(require("../validations/postUserValidations"));
-const postAccountConfirm_1 = __importDefault(require("../controller/postAccountConfirm"));
+const accountConfirm_1 = __importDefault(require("./notifications/accountConfirm"));
 const postUserPerson = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name, lastName, document, email, password, address, image, country, city, state } = req.body;
-        const errors = (0, postUserValidations_1.default)(name, lastName, document, email, password, address, image, country, city, state);
+        const { name, lastName, document, email, password, address, image, country, city, state, role, email_verified } = req.body;
+        const errors = (0, postUserValidations_1.default)(name, lastName, document, email, password, address, image, country, city, state, email_verified);
         if (errors)
             return res.status(400).json({ message: errors });
         if (email) {
@@ -26,6 +26,9 @@ const postUserPerson = (req, res) => __awaiter(void 0, void 0, void 0, function*
             if (EmailUnique)
                 return res.status(400).json({ message: "This email is already registered" });
         }
+        let roleUser = role;
+        if (!roleUser)
+            roleUser = "Person";
         const userPerson = yield db_1.UserPerson.create({
             name,
             lastName,
@@ -38,10 +41,10 @@ const postUserPerson = (req, res) => __awaiter(void 0, void 0, void 0, function*
             country,
             city,
             state,
-            role: "Person",
+            role: roleUser,
         });
         if (userPerson) {
-            (0, postAccountConfirm_1.default)(name, email);
+            (0, accountConfirm_1.default)(name, email);
         }
         console.log("creacion exitosa");
         return res.status(200).send("usuario creado exitosamente");

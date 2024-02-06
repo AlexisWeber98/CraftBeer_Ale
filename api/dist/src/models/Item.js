@@ -9,13 +9,29 @@ const defineModel = () => {
             primaryKey: true,
             defaultValue: sequelize_1.DataTypes.UUIDV4,
         },
+        name: {
+            type: sequelize_1.DataTypes.STRING,
+            allowNull: false,
+        },
+        image: {
+            type: sequelize_1.DataTypes.TEXT,
+            allowNull: false,
+        },
         amount: {
+            type: sequelize_1.DataTypes.FLOAT,
+            allowNull: false,
+        },
+        unitPrice: {
             type: sequelize_1.DataTypes.FLOAT,
             allowNull: false,
         },
         totalPrice: {
             type: sequelize_1.DataTypes.FLOAT,
             allowNull: false,
+        },
+        summary: {
+            type: sequelize_1.DataTypes.TEXT,
+            allowNull: false
         },
     });
 };

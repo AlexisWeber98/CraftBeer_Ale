@@ -17,6 +17,11 @@ const defineModel = () => {
                 max: 5,
             },
         },
+        comment: {
+            type: sequelize_1.DataTypes.TEXT,
+            allowNull: false,
+            defaultValue: ""
+        }
     });
 };
 exports.default = defineModel;

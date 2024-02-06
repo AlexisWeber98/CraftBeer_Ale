@@ -4,7 +4,7 @@ var UserRole;
 (function (UserRole) {
     UserRole["Company"] = "Company";
     UserRole["Person"] = "Person";
-    UserRole["Administrator"] = "Administrator";
+    UserRole["Administrator"] = "Admin";
 })(UserRole || (UserRole = {}));
 exports.default = UserRole;
 //# sourceMappingURL=emuns.js.map

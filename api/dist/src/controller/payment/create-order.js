@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createOrder = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
+const localhost = "http://localhost:5173";
+const frontDeploy = "https://craftbeer-team.netlify.app";
 const mercadopago_1 = __importDefault(require("mercadopago"));
 const { TEST_ACCES_TOKEN } = process.env;
 const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -42,11 +44,12 @@ const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                 email: user.email,
             },
             back_urls: {
-                success: "http://localhost:5173/succes",
-                pending: "http://localhost:5173/pending",
-                failure: "http://localhost:5173/failure",
+                success: `${frontDeploy}/succes`,
+                pending: `${frontDeploy}/pending`,
+                failure: `${frontDeploy}/failure`,
             },
-            auto_return: "approved",
+            notification_url: `https://craftbeer.up.railway.app/webhook`,
+            auto_return: "all"
         });
         console.log(item);
         console.log(results);

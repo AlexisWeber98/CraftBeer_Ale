@@ -23,7 +23,7 @@ const defineUserModel = () => {
         },
         document: {
             type: sequelize_1.DataTypes.BIGINT,
-            allowNull: false,
+            allowNull: true,
             unique: true,
         },
         email: {
@@ -33,7 +33,7 @@ const defineUserModel = () => {
         },
         password: {
             type: sequelize_1.DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         status: {
             type: sequelize_1.DataTypes.BOOLEAN,
@@ -42,7 +42,7 @@ const defineUserModel = () => {
         },
         country: {
             type: sequelize_1.DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         state: {
             type: sequelize_1.DataTypes.STRING,
@@ -50,7 +50,7 @@ const defineUserModel = () => {
         },
         city: {
             type: sequelize_1.DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         address: {
             type: sequelize_1.DataTypes.STRING,

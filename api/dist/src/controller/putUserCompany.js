@@ -20,7 +20,13 @@ const putUserCompany = (req, res) => __awaiter(void 0, void 0, void 0, function*
             return res.status(400).send("Update failed");
         }
         else {
-            return res.status(200).json("was successfully updated");
+            const userCompanyUpdated = yield db_1.UserCompany.findByPk(company.id);
+            if (!userCompanyUpdated) {
+                return res.status(200).json("was successfully updated");
+            }
+            else {
+                return res.status(200).json(userCompanyUpdated);
+            }
         }
     }
     catch (error) {

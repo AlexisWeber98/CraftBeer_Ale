@@ -23,17 +23,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../../db");
 const putProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const productId = req.params.productId;
+    console.log(productId);
     const _a = req.body, { companyId } = _a, updatedData = __rest(_a, ["companyId"]);
+    console.log(req.body);
     try {
         const product = yield db_1.Product.findByPk(productId);
         if (!product) {
             return res.status(404).send({ message: "Product not found" });
         }
-        if (companyId !== product.companyId) {
+        if (companyId !== product.userCompanyId) {
             return res.status(403).send({ message: "You do not have permission to modify this product" });
         }
-        yield product.update(updatedData, { fields: Object.keys(updatedData) });
-        return res.status(200).send({ message: "Product updated successfully" });
+        const updatedProduct = yield product.update(updatedData, { fields: Object.keys(updatedData) });
+        if (updatedProduct[0] === 0) {
+            return res.status(400).send("Update failed");
+        }
+        else {
+            const productUpdated = yield db_1.Product.findByPk(productId);
+            if (!productUpdated) {
+                return res.status(200).send({ message: "Product updated successfully" });
+            }
+            else {
+                return res.status(200).json(productUpdated);
+            }
+        }
     }
     catch (error) {
         console.error("Error updating the product:", error);

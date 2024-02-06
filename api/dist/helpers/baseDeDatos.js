@@ -16,7 +16,7 @@ const dataBase = () => __awaiter(void 0, void 0, void 0, function* () {
             name: "Alberto",
             lastName: "Mendez",
             document: 40556481,
-            email: "craftbeer514@gmail.com",
+            email: "Alber.beer@company.com",
             password: "12345678ABC",
             phone: 3158183233,
             country: "Colombia",
@@ -44,7 +44,7 @@ const dataBase = () => __awaiter(void 0, void 0, void 0, function* () {
             name: "Mateo",
             lastName: "Florido",
             document: 28548954,
-            email: "Grupo Carlsberg@Carlsberg.com",
+            email: "GrupoCarlsberg@Carlsberg.com",
             password: "12345678A",
             phone: 3168526652,
             country: "Colombia",
@@ -324,65 +324,252 @@ const dataBase = () => __awaiter(void 0, void 0, void 0, function* () {
             name: "Diego",
             lastName: "Beta",
             document: 25485662,
+            image: "https://i.pinimg.com/564x/b1/2c/72/b12c72bbaee30c0b5df7cc2ae33df1e8.jpg",
             email: "DiegoBeta@gmail.com",
-            password: "12345678DE",
-            country: "Colombia",
-            city: "Bogotá",
-            state: "Cundinamarca",
-            address: "calle 25 N° 15 20",
+            password: "12345678De",
+            country: "Argentina",
+            city: "Cordoba",
+            state: "Cordoba",
+            address: "rosas 50",
+        },
+        {
+            name: "gloria",
+            lastName: "perez",
+            document: 2548845562,
+            image: "https://i.pinimg.com/236x/fb/45/dc/fb45dcd7f0da4dfc2272f48c4983d94b.jpg",
+            email: "gloria@gmail.com",
+            password: "12384659fE",
+            country: "Argentina",
+            city: "Cordoba",
+            state: "Cordoba",
+            address: "rosas 15",
+        },
+        {
+            name: "maria",
+            lastName: "Beta",
+            document: 25484442,
+            image: "https://i.pinimg.com/236x/79/bd/44/79bd4499f1fb63ab07bacd4957056aba.jpg",
+            email: "maria@gmail.com",
+            password: "1gH4548569",
+            country: "Argentina",
+            city: "Cordoba",
+            state: "Cordoba",
+            address: "rosas 2",
+        },
+        {
+            name: "facundo",
+            lastName: "fance",
+            document: 212254555662,
+            image: "https://i.pinimg.com/236x/c2/7f/03/c27f03231d50be1cf024c55f59e63cd4.jpg",
+            email: "facu25@gmail.com",
+            password: "1235849561Fa",
+            country: "Argentina",
+            city: "Cordoba",
+            state: "Cordoba",
+            address: "rosas 50",
+        },
+        {
+            name: "antoni",
+            lastName: "bernal",
+            document: 2548959612,
+            image: "https://i.pinimg.com/236x/76/7c/49/767c49fad577f51b1f0cf90cacdab075.jpg",
+            email: "antoni@gmail.com",
+            password: "159561526Anto",
+            country: "Argentina",
+            city: "Cordoba",
+            state: "Cordoba",
+            address: "rosas 15",
+        },
+        { name: "Luis",
+            lastName: "Lopez",
+            document: 254856845,
+            image: "https://i.pinimg.com/564x/8f/0b/2e/8f0b2ec5e74f39b4f7fbc791e7420f3e.jpg",
+            email: "luisL@gmail.com",
+            password: "12345678De",
+            country: "Argentina",
+            city: "mendoza",
+            state: "mendoza",
+            address: "orquidea 100",
         },
         {
             name: "Antonia",
             lastName: "Gamma",
             document: 25895621,
+            image: "https://i.pinimg.com/564x/d6/ba/0a/d6ba0a3dc473dac577f7caa080ed0266.jpg",
             email: "AntoGama@gmail.com",
             password: "12345678FG",
-            country: "Colombia",
-            city: "medellin",
-            state: "Antioquia",
-            address: "calle 44 N° 25 35",
+            country: "Argentina",
+            city: "Cordoba",
+            state: "Cordoba",
+            address: "independencia 250",
+        },
+        {
+            name: "Edgar",
+            lastName: "Gamma",
+            image: "https://i.pinimg.com/236x/03/05/46/0305465cf973fc68347bd1d83a8c7aba.jpg",
+            document: 12345678,
+            email: "craftbeer515@gmail.com",
+            password: "12345678FG",
+            country: "Argentina",
+            city: "buenos aires",
+            state: "provincia de buenos aires",
+            address: "paula 25",
+        },
+        {
+            name: "admin",
+            lastName: "admin",
+            document: 111111,
+            email: "craftbeer514@gmail.com",
+            password: "craftbeer2023",
+            country: "Argentina",
+            city: "Cordoba",
+            state: "cordoba",
+            address: "rondeau 358",
+            role: "Admin",
+            image: "https://i.postimg.cc/mDYMdsVF/Simple-October-Fest-Instagram-Post-3.png"
+        },
+        {
+            name: "Amigos",
+            lastName: "Front",
+            document: 98765432,
+            email: "amigosfront@gmail.com",
+            password: "Amigos1234",
+            country: "Sudamerica",
+            city: "Todas",
+            state: "Felices",
+            company: "PF Henry",
+            address: "Cerca de lograrlo",
+            role: "Admin",
+            image: "https://i.pinimg.com/564x/ea/97/86/ea9786de800cb317fe5b2575ddd4e6b0.jpg",
         },
     ];
     const personSaved = yield db_1.UserPerson.bulkCreate(person);
+    personSaved[0].addProduct(productSaved[0]);
     let qualification = [
         {
-            rate: 5,
+            rate: 1,
             userPersonId: personSaved[0].id,
-            ProductId: productSaved[2].id,
-        },
-        {
-            rate: 5,
-            userPersonId: personSaved[1].id,
-            ProductId: productSaved[2].id,
-        },
-        {
-            rate: 5,
-            userPersonId: personSaved[1].id,
             ProductId: productSaved[0].id,
+            comment: "no era lo que esperaba"
         },
         {
-            rate: 5,
-            userPersonId: personSaved[0].id,
-            ProductId: productSaved[5].id,
+            rate: 1,
+            userPersonId: personSaved[1].id,
+            ProductId: productSaved[1].id,
+            comment: "es muy amarga para mi gusto"
         },
         {
-            rate: 5,
-            userPersonId: personSaved[0].id,
+            rate: 2,
+            userPersonId: personSaved[2].id,
+            ProductId: productSaved[2].id,
+            comment: "no es de calidad"
+        },
+        {
+            rate: 2,
+            userPersonId: personSaved[3].id,
+            ProductId: productSaved[3].id,
+            comment: "es muy amarga para mi gusto"
+        },
+        {
+            rate: 3,
+            userPersonId: personSaved[4].id,
             ProductId: productSaved[4].id,
+            comment: "no era lo que esperaba"
         },
         {
-            rate: 5,
-            userPersonId: personSaved[0].id,
+            rate: 3,
+            userPersonId: personSaved[5].id,
+            ProductId: productSaved[5].id,
+            comment: "es buena pero no lleno mis expectativas"
+        },
+        {
+            rate: 4,
+            userPersonId: personSaved[6].id,
+            ProductId: productSaved[6].id,
+            comment: "una cerveza llena de magia"
+        },
+        {
+            rate: 4,
+            userPersonId: personSaved[7].id,
             ProductId: productSaved[7].id,
+            comment: "excelente producto"
+        },
+        {
+            rate: 4,
+            userPersonId: personSaved[8].id,
+            ProductId: productSaved[8].id,
+            comment: "inigualable 10/10"
+        },
+        {
+            rate: 4,
+            userPersonId: personSaved[9].id,
+            ProductId: productSaved[9].id,
+            comment: "excelente producto"
+        },
+        {
+            rate: 4,
+            userPersonId: personSaved[0].id,
+            ProductId: productSaved[10].id,
+            comment: "una cerveza llena de magia"
+        },
+        {
+            rate: 4,
+            userPersonId: personSaved[0].id,
+            ProductId: productSaved[11].id,
+            comment: "excelente producto"
+        },
+        {
+            rate: 4,
+            userPersonId: personSaved[1].id,
+            ProductId: productSaved[12].id,
+            comment: "excelente producto"
+        },
+        {
+            rate: 4,
+            userPersonId: personSaved[2].id,
+            ProductId: productSaved[13].id,
+            comment: "excelente producto"
+        },
+        {
+            rate: 4,
+            userPersonId: personSaved[3].id,
+            ProductId: productSaved[14].id,
+            comment: "excelente producto"
         },
         {
             rate: 5,
-            userPersonId: personSaved[0].id,
-            ProductId: productSaved[9].id,
+            userPersonId: personSaved[4].id,
+            ProductId: productSaved[15].id,
+            comment: "excelente producto"
+        },
+        {
+            rate: 5,
+            userPersonId: personSaved[5].id,
+            ProductId: productSaved[16].id,
+            comment: "inigualable 10/10"
+        },
+        {
+            rate: 5,
+            userPersonId: personSaved[6].id,
+            ProductId: productSaved[17].id,
+            comment: "me encanto su sabor"
+        },
+        {
+            rate: 5,
+            userPersonId: personSaved[7].id,
+            ProductId: productSaved[18].id,
+            comment: "una cerveza llena de magia"
+        }, {
+            rate: 5,
+            userPersonId: personSaved[8].id,
+            ProductId: productSaved[19].id,
+            comment: "me encanto su sabor"
         },
     ];
     const qualificationSaved = yield db_1.Qualification.bulkCreate(qualification);
     qualificationSaved.forEach((arg) => __awaiter(void 0, void 0, void 0, function* () {
+        const productById = yield db_1.Product.findByPk(arg.ProductId);
+        productById.addQualification(arg);
         let rating = yield db_1.Qualification.findAll({
             where: { ProductId: arg.ProductId },
             attributes: ["rate"],
@@ -396,6 +583,126 @@ const dataBase = () => __awaiter(void 0, void 0, void 0, function* () {
             where: { id: arg.ProductId },
         });
     }));
+    const shoppingHistories = [
+        {
+            date: new Date(),
+            totalPrice: productSaved[12].price * 2 + productSaved[10].price * 2,
+            userPersonId: personSaved[0].id,
+            items: [
+                {
+                    ProductId: productSaved[10].id,
+                    name: productSaved[10].name,
+                    image: productSaved[10].image,
+                    unitPrice: productSaved[10].price,
+                    summary: productSaved[10].description,
+                    amount: 2,
+                    totalPrice: productSaved[10].price * 2,
+                },
+                {
+                    ProductId: productSaved[12].id,
+                    name: productSaved[12].name,
+                    image: productSaved[12].image,
+                    unitPrice: productSaved[12].price,
+                    summary: productSaved[12].description,
+                    amount: 2,
+                    totalPrice: productSaved[12].price * 2,
+                },
+            ],
+        },
+        {
+            date: new Date(),
+            totalPrice: productSaved[5].price * 5,
+            userPersonId: personSaved[1].id,
+            items: [
+                {
+                    ProductId: productSaved[5].id,
+                    name: productSaved[5].name,
+                    image: productSaved[5].image,
+                    unitPrice: productSaved[5].price,
+                    summary: productSaved[5].description,
+                    amount: 5,
+                    totalPrice: productSaved[5].price * 5,
+                },
+            ],
+        },
+        {
+            date: new Date(),
+            totalPrice: productSaved[18].price * 8 + productSaved[9].price * 2 + productSaved[3].price * 5,
+            userPersonId: personSaved[1].id,
+            items: [
+                {
+                    ProductId: productSaved[18].id,
+                    name: productSaved[18].name,
+                    image: productSaved[18].image,
+                    unitPrice: productSaved[18].price,
+                    summary: productSaved[18].description,
+                    amount: 8,
+                    totalPrice: productSaved[18].price * 8,
+                },
+                {
+                    ProductId: productSaved[9].id,
+                    name: productSaved[9].name,
+                    image: productSaved[9].image,
+                    unitPrice: productSaved[9].price,
+                    summary: productSaved[9].description,
+                    amount: 2,
+                    totalPrice: productSaved[9].price * 2,
+                },
+                {
+                    ProductId: productSaved[3].id,
+                    name: productSaved[3].name,
+                    image: productSaved[3].image,
+                    unitPrice: productSaved[3].price,
+                    summary: productSaved[3].description,
+                    amount: 5,
+                    totalPrice: productSaved[3].price * 5,
+                },
+            ],
+        },
+    ];
+    const shoppingHistoriesSaved = yield Promise.all(shoppingHistories.map((shoppingHistory) => __awaiter(void 0, void 0, void 0, function* () {
+        const { date, totalPrice, userPersonId, items } = shoppingHistory;
+        const person = yield db_1.UserPerson.findByPk(userPersonId);
+        if (!person) {
+            console.warn(`UserPerson with ID ${userPersonId} not found.`);
+            return null;
+        }
+        const newShoppingHistory = yield db_1.ShoppingHistory.create({
+            date,
+            totalPrice,
+            userPersonId,
+        });
+        person.addShoppingHistory(newShoppingHistory);
+        const createdItems = yield Promise.all(items.map((item) => __awaiter(void 0, void 0, void 0, function* () {
+            const { ProductId, name, image, amount, unitPrice, summary, totalPrice: itemTotalPrice, } = item;
+            const product = yield db_1.Product.findByPk(ProductId);
+            if (!product) {
+                console.warn(`Product with ID ${ProductId} not found.`);
+                return null;
+            }
+            if (product.stock < amount) {
+                console.warn(`Not enough stock for product with ID ${ProductId}.`);
+                return null;
+            }
+            const createdItem = yield db_1.Item.create({
+                ProductId,
+                name,
+                image,
+                amount,
+                unitPrice,
+                summary,
+                totalPrice: itemTotalPrice,
+            });
+            yield newShoppingHistory.addItems(createdItem);
+            const newStock = product.stock - amount;
+            yield db_1.Product.update({ stock: newStock }, { where: { id: ProductId } });
+            return createdItem;
+        })));
+        const newItems = createdItems.filter((item) => item !== null);
+        if (newShoppingHistory) {
+        }
+        return newShoppingHistory;
+    })));
 });
 exports.default = dataBase;
 //# sourceMappingURL=baseDeDatos.js.map

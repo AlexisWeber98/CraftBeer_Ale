@@ -13,6 +13,7 @@ const db_1 = require("../../db");
 const putUserPerson = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const person = req.body;
+        console.log(person);
         const updateUserPerson = yield db_1.UserPerson.update(person, {
             where: { id: person.id },
         });
@@ -20,7 +21,13 @@ const putUserPerson = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             return res.status(400).send("Update failed");
         }
         else {
-            return res.status(200).json("was successfully updated");
+            const userPersonUpdated = yield db_1.UserPerson.findByPk(person.id);
+            if (!userPersonUpdated) {
+                return res.status(200).json("was successfully updated");
+            }
+            else {
+                return res.status(200).json(userPersonUpdated);
+            }
         }
     }
     catch (error) {

@@ -13,66 +13,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../../db");
-const postAccountConfirm_1 = __importDefault(require("./postAccountConfirm"));
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,30}$/;
+const accountConfirm_1 = __importDefault(require("./notifications/accountConfirm"));
+const postCompanyValidation_1 = __importDefault(require("../validations/postCompanyValidation"));
 const postCompany = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, lastName, document, email, password, phone, country, state, city, company, address, image, } = req.body;
-        if (!name)
-            return res.status(400).json({ message: "Name is required." });
-        if (/\d/.test(name))
-            return res.status(400).json({ message: "Name cannot include a number." });
-        if (name.length > 30)
-            return res
-                .status(400)
-                .json({ message: "Name cannot exceed 30 characters." });
-        if (!lastName)
-            return res.status(400).json({ message: "Name is required." });
-        if (/\d/.test(lastName))
-            return res.status(400).json({ message: "Name cannot include a number." });
-        if (lastName.length > 30)
-            return res
-                .status(400)
-                .json({ message: "Last Name cannot exceed 30 characters." });
-        if (!company)
-            return res.status(400).json({ message: "Last name is required." });
-        if (/\d/.test(company))
-            return res
-                .status(400)
-                .json({ message: "Company cannot include a number." });
-        if (company.length > 30)
-            return res
-                .status(400)
-                .json({ message: "Company cannot exceed 30 characters." });
-        if (!address)
-            return res.status(400).json({ message: "Address is required" });
-        if (!country)
-            return res.status(400).json({ message: "Country is required" });
-        if (!state)
-            return res.status(400).json({ message: "State is required" });
-        if (!city)
-            return res.status(400).json({ message: "City is required" });
-        if (!document)
-            return res.status(400).json({ message: "Document is required." });
-        if (isNaN(document))
-            return res
-                .status(400)
-                .json({ message: "Document must be a valid number." });
-        if (!phone)
-            return res.status(400).json({ message: "Phone is required." });
-        if (isNaN(phone))
-            return res.status(400).json({ message: "Phone must be a valid number." });
-        if (!email)
-            return res.status(400).json({ message: "Email is required." });
-        if (!emailRegex.test(email))
-            return res.status(400).json({ message: "Invalid email address" });
-        if (!password)
-            return res.status(400).json({ message: "Password is required." });
-        if (!passwordRegex.test(password))
-            return res.status(400).json({
-                message: "Password must contain at least one uppercase letter, one lowercase letter, and one digit. (6 - 30 char)",
-            });
+        const errors = postCompanyValidation_1.default;
         if (email) {
             const EmailUnique = yield db_1.UserPerson.findOne({ where: { email: email } });
             if (EmailUnique)
@@ -95,7 +41,7 @@ const postCompany = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             role: "Company",
         });
         if (userCompany) {
-            (0, postAccountConfirm_1.default)(company, email);
+            (0, accountConfirm_1.default)(company, email);
         }
         return res.status(200).json(userCompany);
     }
