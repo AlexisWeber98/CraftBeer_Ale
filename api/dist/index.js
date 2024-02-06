@@ -10,7 +10,7 @@ const port = process.env.PORT || 3001;
 const baseDeDatos_1 = __importDefault(require("./helpers/baseDeDatos"));
 dotenv_1.default.config();
 db_1.sequelize
-    .sync({ force: true })
+    .sync({ force: false })
     .then(() => {
     (0, baseDeDatos_1.default)();
     console.log("Database synchronized");
