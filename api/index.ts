@@ -1,5 +1,5 @@
-import { sequelize } from "./db"; // Ajusta la ruta si es necesario
-import server from "./src/app"; // Ajusta la ruta si es necesario
+import { sequelize } from "./db"; 
+import server from "./src/app";
 import dotenv from "dotenv";
 const port = process.env.PORT || 3001;
 import dataBase from "./helpers/baseDeDatos";
@@ -13,7 +13,7 @@ sequelize
    dataBase();
     console.log("Database synchronized");
     server.listen(port, () => {
-      console.log(`Server listening on port ${port}`);
+      console.log(`Server listening on port ${3000}`, "0.0.0.0");
     });
   })
   .catch((error: Error) => {

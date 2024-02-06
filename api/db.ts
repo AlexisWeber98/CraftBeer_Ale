@@ -3,16 +3,26 @@ dotenv.config();
 import { Sequelize } from "sequelize";
 import fs from "fs";
 import path from "path";
+import { Dialect } from "sequelize";
 
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY, ENVIRONMENT } = process.env;
+const {
+  DB_USER,
+  DB_PASSWORD,
+  DB_HOST,
+  DATABASE_URL,
+  ENVIRONMENT,
+  FLY_POSTGRES_HOST,
+  FLY_POSTGRES_PORT,
+  FLY_POSTGRES_DB,
+  FLY_POSTGRES_USER,
+  FLY_POSTGRES_PASSWORD,
+  CONN_STRING,
+} = process.env;
 
-const sequelize = new Sequelize( ENVIRONMENT==="dev"?
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/craftbeer`:`${DB_DEPLOY}`,
-  {
-    logging: false,
-    native: false,
-  }
-);
+const sequelize = new Sequelize(`${CONN_STRING}`, {
+  logging: false,
+  native: false,
+});
 
 const basename = path.basename(__filename);
 
@@ -36,23 +46,36 @@ Object.entries(sequelize.models).forEach(([name, model]) => {
   upperCaseModels[upperCaseName] = model;
 });
 
-
 // relacionamos
-const { UserPerson,UserCompany,ShoppingHistory,Qualification,Product,Item,CodePassword} = upperCaseModels; 
+const {
+  UserPerson,
+  UserCompany,
+  ShoppingHistory,
+  Qualification,
+  Product,
+  Item,
+  CodePassword,
+} = upperCaseModels;
 
-UserPerson.hasMany(ShoppingHistory)
-UserPerson.hasMany(Qualification)
+UserPerson.hasMany(ShoppingHistory);
+UserPerson.hasMany(Qualification);
 
-UserCompany.hasMany(Product)
+UserCompany.hasMany(Product);
 
-Product.hasMany(Qualification)
-Product.hasMany(Item)
-Product.belongsToMany(UserPerson,{through:"Favorite"})
-UserPerson.belongsToMany(Product,{through:"Favorite"})
+Product.hasMany(Qualification);
+Product.hasMany(Item);
+Product.belongsToMany(UserPerson, { through: "Favorite" });
+UserPerson.belongsToMany(Product, { through: "Favorite" });
 
-ShoppingHistory.hasMany(Item)
+ShoppingHistory.hasMany(Item);
 
-
-
-
-export { UserPerson,UserCompany,ShoppingHistory,Qualification,Product,CodePassword,Item,sequelize}
+export {
+  UserPerson,
+  UserCompany,
+  ShoppingHistory,
+  Qualification,
+  Product,
+  CodePassword,
+  Item,
+  sequelize,
+};
