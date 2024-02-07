@@ -3,24 +3,17 @@ dotenv.config();
 import { Sequelize } from "sequelize";
 import fs from "fs";
 import path from "path";
-import { Dialect } from "sequelize";
 
 const {
   DB_USER,
   DB_PASSWORD,
   DB_HOST,
-  DATABASE_URL,
+  DATABASE_LOCAL_URL,
   ENVIRONMENT,
-  FLY_POSTGRES_HOST,
-  FLY_POSTGRES_PORT,
-  FLY_POSTGRES_DB,
-  FLY_POSTGRES_USER,
-  FLY_POSTGRES_PASSWORD,
-  CONN_STRING,
-  FLY_DATABASE_URL
+  DATABASE_URL,
 } = process.env;
 
-const sequelize = new Sequelize(`${FLY_DATABASE_URL}`, {
+const sequelize = new Sequelize(`${DATABASE_URL}`, {
   logging: false,
   native: false,
 });
@@ -29,13 +22,13 @@ const basename = path.basename(__filename);
 
 const modelDefiners: Array<(sequelize: Sequelize) => void> = [];
 
-fs.readdirSync(path.join(__dirname, "src/models"))
+fs.readdirSync(path.join(__dirname, "/src/models"))
   .filter(
     (file) =>
       file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".ts"
   )
   .forEach((file) => {
-    const modelDefiner = require(path.join(__dirname, "src/models", file));
+    const modelDefiner = require(path.join(__dirname, "/src/models", file));
     modelDefiners.push(modelDefiner.default);
   });
 

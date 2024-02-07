@@ -8,7 +8,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const morgan_1 = __importDefault(require("morgan"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const server = express();
-const routes = require("./routes/index.ts");
+const routes = require("./routes/index.js");
 server.use(express.json());
 server.use(cors());
 server.use(body_parser_1.default.urlencoded({ extended: true, limit: "50mb" }));
