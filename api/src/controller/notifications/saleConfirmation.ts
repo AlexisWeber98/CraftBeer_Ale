@@ -64,7 +64,7 @@ const saleConfirmation = async (
       },
     });
     filterUserCompany.forEach((element) => {
-        console.log(element[0].email)
+      console.log(element[0].email);
       let mailOptions = {
         from: NODEMAILER_USER,
         to: element[0].email,
@@ -120,7 +120,7 @@ const saleConfirmation = async (
           </head>
       </html>`,
       };
-      console.log("enviando email")
+      console.log("enviando email");
       transporter.sendMail(mailOptions, (error: any, info: string) => {
         if (error) {
           console.log(error.message);

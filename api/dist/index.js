@@ -14,7 +14,7 @@ db_1.sequelize
     .then(() => {
     (0, baseDeDatos_1.default)();
     console.log("Database synchronized");
-    app_1.default.listen(port, '0.0.0.0', () => {
+    app_1.default.listen(3001, '0.0.0.0', () => {
         console.log(`Server listening on port ${port}`);
     });
 })

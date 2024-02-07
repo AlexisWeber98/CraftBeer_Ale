@@ -4,6 +4,8 @@ import UserRole from "../emuns";
 import { UserCompanyModelInterface } from "../interfaces/interfaces";
 
 
+
+
 type UserCompanyModel = Model<UserCompanyModelInterface > & {
   new (): UserCompanyModelInterface ;
 };

@@ -17,9 +17,10 @@ const {
   FLY_POSTGRES_USER,
   FLY_POSTGRES_PASSWORD,
   CONN_STRING,
+  FLY_DATABASE_URL
 } = process.env;
 
-const sequelize = new Sequelize(`${CONN_STRING}`, {
+const sequelize = new Sequelize(`${FLY_DATABASE_URL}`, {
   logging: false,
   native: false,
 });
