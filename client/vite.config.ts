@@ -24,5 +24,5 @@ export default defineConfig({
       { find: '@', replacement: path.resolve(__dirname, 'src') }
     ]
   },
-  base: '/craftbeer_Ale/', // Ajusta esto según la subcarpeta de tu dominio
+  base: '/', // Ajusta esto según la subcarpeta de tu dominio
 });
