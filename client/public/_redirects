@@ -1,1 +1,5 @@
+# Asignar el tipo MIME 'text/javascript' a los archivos .js
+/*.js    Content-Type: text/javascript
+
+# Redirigir todas las solicitudes que no coinciden con un archivo existente al archivo index.html
 /*    /index.html   200
