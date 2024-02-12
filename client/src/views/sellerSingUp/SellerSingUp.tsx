@@ -6,13 +6,16 @@ import { Form, Row, Col, Button } from "react-bootstrap";
 // import "../sellerSingUp/selllerSingUp.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createdCompany } from "../../redux/actions/actions";
-import {DragAndDrop} from "../../components/Cloudinary/Cloudinary.tsx"
+import { DragAndDrop } from "../../components/Cloudinary/Cloudinary.tsx";
 import { AppState } from "../../redux/reducer";
-import { provincesByCountry, ProvinceData } from '../../components/provincesData/provincesData.ts';
+import {
+  provincesByCountry,
+  ProvinceData,
+} from "../../components/provincesData/provincesData.ts";
 //import { toast } from "react-hot-toast";
 
 // STYLES
-import Styles from"./sellerSingUp.module.css";
+import Styles from "./sellerSingUp.module.css";
 
 // import Styles from './sellerSingUp.module.css';
 //....
@@ -25,7 +28,7 @@ interface CountryData {
 // SELLER SING UP
 const SellerSingUp: React.FC = () => {
   const dispatch = useDispatch<Dispatch<AnyAction> | any>();
-  const urlImage = useSelector((state: AppState)=> state.urlImage)
+  const urlImage = useSelector((state: AppState) => state.urlImage);
   const [countryNames, setCountryNames] = useState<string[]>([]);
 
   const [input, setInput] = useState({
@@ -69,7 +72,6 @@ const SellerSingUp: React.FC = () => {
       ...input,
     });
   };
-  
 
   const validation = (input: any, name: any) => {
     if (name === "name") {
@@ -93,7 +95,11 @@ const SellerSingUp: React.FC = () => {
         if (/^(?=.*[A-Z])(?=.*[0-9]).+$/.test(input.password)) {
           setErrors({ ...errors, password: "" });
         } else {
-          setErrors({ ...errors, password: "La contraseña debe contener al menos una letra mayúscula y un número" });
+          setErrors({
+            ...errors,
+            password:
+              "La contraseña debe contener al menos una letra mayúscula y un número",
+          });
         }
       } else {
         setErrors({ ...errors, password: "Información requerida" });
@@ -159,15 +165,17 @@ const SellerSingUp: React.FC = () => {
 
   const fetchCountries = async () => {
     try {
-      const response = await fetch('https://restcountries.com/v3.1/region/South%20America');
+      const response = await fetch(
+        "https://restcountries.com/v3.1/region/South%20America"
+      );
       const data: CountryData[] = await response.json();
-      const countryNames = data.map(country => country.name.common);
+      const countryNames = data.map((country) => country.name.common);
       setCountryNames(countryNames);
     } catch (error) {
-      console.error('Error fetching country names:', error);
+      console.error("Error fetching country names:", error);
     }
   };
-  
+
   useEffect(() => {
     fetchCountries();
   }, []);
@@ -175,32 +183,30 @@ const SellerSingUp: React.FC = () => {
   return (
     <div className="bodyFormSeller">
       <div className={Styles.formBoxContainer}>
-        <Form className={Styles.form}
-        onSubmit={handlerSubmit}
-        >
-            <h5 className={Styles.title}>
-              Crea tu usuario de vendedor. Propociona la siguiente información:
-            </h5>
-            <div className={Styles.title}>
-              <strong>USUARIO</strong>
-            </div>
+        <Form className={Styles.form} onSubmit={handlerSubmit}>
+          <h5 className={Styles.title}>
+            Crea tu usuario de vendedor. Propociona la siguiente información:
+          </h5>
+          <div className={Styles.title}>
+            <strong>USUARIO</strong>
+          </div>
           <Row className={Styles.row1}>
             <Col>
               <Form.Control
-              className={Styles.input}
-              placeholder="Correo electrónico"
-              onChange={handlerChange}
-              name="email"
+                className={Styles.input}
+                placeholder="Correo electrónico"
+                onChange={handlerChange}
+                name="email"
               />
               <h6 className={Styles.mensajes}>{errors.email}</h6>
             </Col>
             <Col>
               <Form.Control
-              className={Styles.input}
-              placeholder="Contraseña"
-              onChange={handlerChange}
-              name="password"
-              type="password"
+                className={Styles.input}
+                placeholder="Contraseña"
+                onChange={handlerChange}
+                name="password"
+                type="password"
               />
               <h6 className={Styles.mensajes}>{errors.password}</h6>
             </Col>
@@ -211,19 +217,19 @@ const SellerSingUp: React.FC = () => {
           <Row className={Styles.row1}>
             <Col>
               <Form.Control
-              className={Styles.input}
-              placeholder="Nombres"
-              onChange={handlerChange}
-              name="name"
+                className={Styles.input}
+                placeholder="Nombres"
+                onChange={handlerChange}
+                name="name"
               />
               <h6 className={Styles.mensajes}>{errors.name}</h6>
             </Col>
             <Col>
               <Form.Control
-              className={Styles.input}
-              placeholder="Apellidos"
-              onChange={handlerChange}
-              name="lastName"
+                className={Styles.input}
+                placeholder="Apellidos"
+                onChange={handlerChange}
+                name="lastName"
               />
               <h6 className={Styles.mensajes}>{errors.lastName}</h6>
             </Col>
@@ -231,19 +237,19 @@ const SellerSingUp: React.FC = () => {
           <Row className={Styles.row1}>
             <Col>
               <Form.Control
-              className={Styles.input}
-              placeholder="Documento de identidad"
-              onChange={handlerChange}
-              name="document"
+                className={Styles.input}
+                placeholder="Documento de identidad"
+                onChange={handlerChange}
+                name="document"
               />
               <h6 className={Styles.mensajes}>{errors.document}</h6>
             </Col>
             <Col>
               <Form.Control
-              className={Styles.input}
-              placeholder="Teléfono móvil"
-              onChange={handlerChange}
-              name="phone"
+                className={Styles.input}
+                placeholder="Teléfono móvil"
+                onChange={handlerChange}
+                name="phone"
               />
               <h6 className={Styles.mensajes}>{errors.phone}</h6>
             </Col>
@@ -254,19 +260,19 @@ const SellerSingUp: React.FC = () => {
           <Row className={Styles.row1}>
             <Col>
               <Form.Control
-              className={Styles.input}
-              placeholder="Nombre de la Empresa"
-              onChange={handlerChange}
-              name="company"
+                className={Styles.input}
+                placeholder="Nombre de la Empresa"
+                onChange={handlerChange}
+                name="company"
               />
               <h6 className={Styles.mensajes}>{errors.company}</h6>
             </Col>
             <Col>
               <Form.Control
-              className={Styles.input}
-              placeholder="Dirección de la empresa"
-              onChange={handlerChange}
-              name="address"
+                className={Styles.input}
+                placeholder="Dirección de la empresa"
+                onChange={handlerChange}
+                name="address"
               />
               <h6 className={Styles.mensajes}>{errors.address}</h6>
             </Col>
@@ -274,12 +280,11 @@ const SellerSingUp: React.FC = () => {
           <Row className={Styles.row1}>
             <Col>
               <Form.Control
-              className={Styles.input}
-              as="select"
-              name="country"
-              value={input.country}
-              onChange={handlerChange}
-              >
+                className={Styles.input}
+                as="select"
+                name="country"
+                value={input.country}
+                onChange={handlerChange}>
                 <option value="">Selecciona un país...</option>
                 {countryNames.map((countryName, index) => (
                   <option key={index} value={countryName}>
@@ -291,12 +296,11 @@ const SellerSingUp: React.FC = () => {
             </Col>
             <Col>
               <Form.Control
-              className={Styles.input}
-              as="select"
-              name="state"
-              value={input.state}
-              onChange={handlerChange}
-              >
+                className={Styles.input}
+                as="select"
+                name="state"
+                value={input.state}
+                onChange={handlerChange}>
                 <option value="">Selecciona una provincia...</option>
                 {input.country &&
                   provincesByCountry[input.country]?.map(
@@ -313,18 +317,18 @@ const SellerSingUp: React.FC = () => {
           <Row className={Styles.row1}>
             <Col>
               <Form.Control
-              className={Styles.input}
-              placeholder="Ciudad"
-              onChange={handlerChange}
-              name="city"
+                className={Styles.input}
+                placeholder="Ciudad"
+                onChange={handlerChange}
+                name="city"
               />
               <h6 className={Styles.mensajes}>{errors.city}</h6>
             </Col>
 
-          {/* </Row>
+            {/* </Row>
           <Row className={Styles.row1}> */}
             <Col>
-            <DragAndDrop/>
+              <DragAndDrop />
               {/* <Form.Control
                 placeholder="URL Logo o imagen"
                 onChange={handlerChange}
@@ -344,8 +348,7 @@ const SellerSingUp: React.FC = () => {
                 boxShadow: "5px 5px 10px black",
               }}
               type="submit"
-              disabled={disable(errors)}
-            >
+              disabled={disable(errors)}>
               Crear Usuario
             </Button>
           </div>

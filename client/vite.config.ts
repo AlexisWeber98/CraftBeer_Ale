@@ -10,9 +10,7 @@ export default defineConfig({
     "process.env": process.env,
   },
   resolve: {
-    alias: [
-      { find: '@', replacement: path.resolve(__dirname, 'src') }
-    ]
+    alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
   },
-  base: './', // Ajusta esto según la subcarpeta de tu dominio
+  base: "./", // Ajusta esto según la subcarpeta de tu dominio
 });
