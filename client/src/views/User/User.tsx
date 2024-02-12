@@ -101,7 +101,7 @@ const User = () => {
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`/user`, editedUserData);
+      //const response = await axios.put(`/user`, editedUserData);
       // Update userData to show the updated data
       setUserData(editedUserData as UserData);
       setIsEditMode(false); // Exit edit mode
