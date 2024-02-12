@@ -4,7 +4,7 @@ import {
   salesSumAction,
   salesDetailAction,
 } from "./actions/actions";
-import { AppState, initialState } from "./reducer";
+import { AccessLogin, AppState, initialState } from "./reducer";
 
 export const getAllBeer = (
   state = initialState,
@@ -102,21 +102,23 @@ export const deleteStorageCart = (state: AppState) => {
 export const login = (state = initialState, action: loginAction) => {
   const user: string | null = localStorage.getItem(action.payload.user.id);
 
-  let accessLogin;
+  let accessLogin: AccessLogin
+
   if (user === null) {
     accessLogin = {
-      acces: action.payload.access,
+      access: action.payload.access, 
       id: action.payload.user.id,
       role: action.payload.user.role,
     };
   } else {
     const json = JSON.parse(user);
     accessLogin = {
-      access: json.access,
+      access: json.access, 
       id: json.user.id,
       role: json.user.role,
     };
   }
+
   return {
     ...state,
     accessLogin: accessLogin,

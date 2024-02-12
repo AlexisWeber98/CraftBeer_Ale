@@ -47,7 +47,7 @@ export interface AccessLogin {
   access: boolean;
   id: string;
   role: string;
-  cart?: typeof localStorage;
+  cart?: Storage | null | undefined; 
 }
 export interface beers {
   ABV: number;
@@ -134,7 +134,7 @@ export const initialState: AppState = {
     access: false,
     id: "",
     role: "",
-    cart: { ...localStorage },
+    cart: { ...localStorage} 
   },
   urlImage: "",
   hasNavigated: false,

@@ -103,15 +103,12 @@ const ProductsBySeller = () => {
                     : beer.qualification}
                 </td>
                 <td>
-                  <NavDropdown
-                    title={beer.status === true ? "Active" : "Inactive"}>
-                    <NavDropdown.Item onClick={handlerActive} >
-                      Activate
-                    </NavDropdown.Item>
-                    <NavDropdown.Item onClick={handlerInactive} >
-                      Inactivate
-                    </NavDropdown.Item>
-                  </NavDropdown>
+                  <NavDropdown.Item onClick={handlerActive}>
+                    Activate
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={handlerInactive}>
+                    Inactivate
+                  </NavDropdown.Item>
                 </td>
               </tr>
             );
