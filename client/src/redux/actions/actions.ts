@@ -85,9 +85,9 @@ export const orderFilters = (
 export const localStorageCart = (data: object) => {
   return {
     type: LOCAL_STORAGE,
-    payload:data
-  }
-}
+    payload: data,
+  };
+};
 
 //actions para guardar el localStorage
 export const totalPages = (data: number) => {
@@ -214,7 +214,7 @@ export interface UserData {
 export const createdUser = (userData: UserData) => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      const endpoint= "/user"
+      const endpoint = "/user";
       let createdUserResponse = await axios.post(endpoint, userData);
       dispatch({
         type: CREATED_USER,

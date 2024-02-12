@@ -14,7 +14,7 @@ const ProductsBySeller = () => {
 
   const [infoUser, setInfoUser] = useState<any>({});
   console.log(infoUser);
-  
+
   useEffect(() => {
     const solicitud = async () => {
       const response = await axios.get(`/company/${id}`);
@@ -26,15 +26,14 @@ const ProductsBySeller = () => {
 
   let products = infoUser.Products;
   console.log(products);
-  
 
-  const handlerActive = async (event:any) => {
+  const handlerActive = async (event: any) => {
     try {
-      const idProduct = event?.target.name
+      const idProduct = event?.target.name;
       const activar = {
         companyId: infoUser.id,
-        status: "true"
-      }
+        status: "true",
+      };
       console.log(idProduct);
       await axios.put(`/product/${idProduct}`, activar);
       toast.success("Product has been activated");
@@ -45,11 +44,11 @@ const ProductsBySeller = () => {
 
   const handlerInactive = async (event: any) => {
     try {
-      const idProduct = event?.target.name
+      const idProduct = event?.target.name;
       const inactivar = {
         companyId: infoUser.id,
-        status: "false"
-      }
+        status: "false",
+      };
       console.log(idProduct);
       await axios.put(`/product/${idProduct}`, inactivar);
       toast.success("Product has been inactivated");
@@ -77,8 +76,21 @@ const ProductsBySeller = () => {
             return (
               <tr>
                 <td>
-                  <Link to={`/detail/${beer.id}`}>
-                    <Button name={beer.id}>Beer detail</Button>
+                  <Link to={`/detail/${beer.id}`} style={{ margin: "5%" }}>
+                    <Button style={{ marginTop: "2%" }} name={beer.id}>
+                      Beer detail
+                    </Button>
+                  </Link>
+                  <Link to={`/admin/adminproductmodify/${beer.id}`}>
+                    <Button
+                      style={{
+                        backgroundColor: "black",
+                        border: "none",
+                        marginTop: "2%",
+                      }}
+                      name={beer.id}>
+                      Edit beer
+                    </Button>
                   </Link>
                 </td>
                 <td>{beer.name}</td>
@@ -92,12 +104,11 @@ const ProductsBySeller = () => {
                 </td>
                 <td>
                   <NavDropdown
-                    title={beer.status === true ? "Active" : "Inactive"}
-                  >
-                    <NavDropdown.Item onClick={handlerActive} name={beer.id}>
+                    title={beer.status === true ? "Active" : "Inactive"}>
+                    <NavDropdown.Item onClick={handlerActive} >
                       Activate
                     </NavDropdown.Item>
-                    <NavDropdown.Item onClick={handlerInactive} name={beer.id}>
+                    <NavDropdown.Item onClick={handlerInactive} >
                       Inactivate
                     </NavDropdown.Item>
                   </NavDropdown>
@@ -107,9 +118,13 @@ const ProductsBySeller = () => {
           })}
         </tbody>
       </Table>
-      <div style={{textAlign:"center"}}>
+      <div style={{ textAlign: "center" }}>
         <Link to="/admin">
-          <Button className="botonNav" style={{width:"50%", borderRadius:"20px"}}>Back to Panel</Button>
+          <Button
+            className="botonNav"
+            style={{ width: "50%", borderRadius: "20px" }}>
+            Back to Panel
+          </Button>
         </Link>
       </div>
     </div>

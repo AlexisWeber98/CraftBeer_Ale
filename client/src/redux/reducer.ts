@@ -17,7 +17,7 @@ import {
   sellerId,
   userCompanySalesSummary,
   userCompanySalesDetail,
-  getTopRated
+  getTopRated,
 } from "./reducerFunctions";
 import {
   CREATED_PRODUCT,
@@ -37,7 +37,7 @@ import {
   ID_SELLER,
   COMPANY_SALES_SUMMARY,
   COMPANY_SALES_DETAIL,
-  TOP_PRODUCT
+  TOP_PRODUCT,
 } from "../redux/actions/actionsTypes";
 import { SaveDataLS } from "../components/LocalStorage/LocalStorage";
 
@@ -89,38 +89,40 @@ export interface salesDetail {
 export interface AppState {
   allBeer: beers[];
   beerFilters: BeerFilters;
-  localStorageCart: SaveDataLS [];
-  totalPages:number;
+  localStorageCart: SaveDataLS[];
+  totalPages: number;
   allCompany: object[];
   accessLogin: AccessLogin;
-  urlImage: string;
+  urlImage: any;
   hasNavigated: boolean;
   idBuyer: any;
   idSeller: any;
-  companySalesSum: salesSum[]
+  companySalesSum: salesSum[];
   companySalesDetail: salesDetail[];
-  topProducts:topProducts[]
+  topProducts: topProducts[];
 }
 export interface BeerFilters {
   IBU?: number; // El signo de interrogación indica que la propiedad es opcional
   AVB?: number;
-  name?: String;
-  pag?: Number;
+  name?: string;
+  pag?: number;
   price?: number;
-  qualification?: String;
-  type?: String;
-  order?: String;
+  qualification?: string;
+  type?: string;
+  order?: string;
 }
 
 export interface topProducts {
-  name:String;
+  name: string;
   image: string;
-  qualification:Number;
+  qualification: number;
 }
 
-//hidratar el estado localStorageCart desde la storage 
-const dataStorage = Object.keys(localStorage).map((key) =>   JSON.parse(localStorage[key]));
-console.log("fadfsf",dataStorage);
+//hidratar el estado localStorageCart desde la storage
+const dataStorage = Object.keys(localStorage).map((key) =>
+  JSON.parse(localStorage[key])
+);
+console.log("fadfsf", dataStorage);
 
 export const initialState: AppState = {
   allBeer: [],
@@ -136,11 +138,11 @@ export const initialState: AppState = {
   },
   urlImage: "",
   hasNavigated: false,
-  idBuyer:"",
+  idBuyer: "",
   idSeller: "",
   companySalesSum: [],
   companySalesDetail: [],
-  topProducts:[],
+  topProducts: [],
 };
 
 const rootReducer = (
@@ -166,11 +168,8 @@ const rootReducer = (
     case LOCAL_STORAGE: {
       return saveLocalStorageCart(state, action);
     }
-    case DELETE_CARTSTORAGE :{
-      return deleteStorageCart(state)
-    }
-    case DELETE_CARTSTORAGE :{
-      return deleteStorageCart(state)
+    case DELETE_CARTSTORAGE: {
+      return deleteStorageCart(state);
     }
     case LOGIN: {
       return login(state, action);
@@ -188,22 +187,22 @@ const rootReducer = (
       return urlImage(state, action);
     }
     case HAS_NAVIGATED: {
-      return hasNavigatedTrue(state)
+      return hasNavigatedTrue(state);
     }
     case ID_BUYER: {
-      return buyerId(state, action)
+      return buyerId(state, action);
     }
     case ID_SELLER: {
-      return sellerId(state, action)
+      return sellerId(state, action);
     }
     case COMPANY_SALES_SUMMARY: {
-      return userCompanySalesSummary(state, action)
+      return userCompanySalesSummary(state, action);
     }
     case COMPANY_SALES_DETAIL: {
-      return userCompanySalesDetail(state, action)
+      return userCompanySalesDetail(state, action);
     }
     case TOP_PRODUCT: {
-      return getTopRated(state , action)
+      return getTopRated(state, action);
     }
     default:
       return state;

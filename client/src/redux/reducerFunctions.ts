@@ -1,4 +1,9 @@
-import { ActionWithPayload, loginAction, salesSumAction, salesDetailAction } from "./actions/actions";
+import {
+  ActionWithPayload,
+  loginAction,
+  salesSumAction,
+  salesDetailAction,
+} from "./actions/actions";
 import { AppState, initialState } from "./reducer";
 
 export const getAllBeer = (
@@ -11,7 +16,7 @@ export const getAllBeer = (
   };
 };
 
-//ALMACENAR FILTROS 
+//ALMACENAR FILTROS
 export const orderFiltersReducer = (
   state = initialState,
   action: ActionWithPayload<string, any>
@@ -21,7 +26,7 @@ export const orderFiltersReducer = (
     beerFilters: action.payload,
   };
 };
-//CREAR PRODUCTOS 
+//CREAR PRODUCTOS
 
 export const productCreated = (state = initialState) => {
   return {
@@ -33,8 +38,8 @@ export const productCreated = (state = initialState) => {
 export const postCompany = (state = initialState) => {
   return {
     ...state,
-  }
-}
+  };
+};
 //Crear usuario persona
 export const userCreated = (state = initialState) => {
   return {
@@ -42,24 +47,26 @@ export const userCreated = (state = initialState) => {
   };
 };
 
-
-//ALMACENAR LOCAL STORAGE 
+//ALMACENAR LOCAL STORAGE
 export const saveLocalStorageCart = (
   state = initialState,
   action: ActionWithPayload<string, any>
 ) => {
-
-  const existingItem = state.localStorageCart.find(item => item.id === action.payload.id);
+  const existingItemIndex = state.localStorageCart.findIndex(
+    (item) => item.id === action.payload.id
+  );
 
   if (action.payload.quantity === 0) {
-    const updatedCart = state.localStorageCart.filter(item => item.id !== action.payload.id);
+    const updatedCart = state.localStorageCart.filter(
+      (item) => item.id !== action.payload.id
+    );
     return {
       ...state,
-      localStorageCart: updatedCart
+      localStorageCart: updatedCart,
     };
-  } else if (existingItem) {
-    const updatedCart = state.localStorageCart.map(item => {
-      if (item.id === action.payload.id) {
+  } else if (existingItemIndex !== -1) {
+    const updatedCart = state.localStorageCart.map((item, index) => {
+      if (index === existingItemIndex) {
         return action.payload;
       } else {
         return item;
@@ -67,60 +74,57 @@ export const saveLocalStorageCart = (
     });
     return {
       ...state,
-      localStorageCart: updatedCart
+      localStorageCart: updatedCart,
     };
   } else {
     return {
       ...state,
-      localStorageCart: [...state.localStorageCart, action.payload]
+      localStorageCart: [...state.localStorageCart, action.payload],
     };
   }
-
 };
 
-// borrar el cart cuando se aprueba el pago 
+// borrar el cart cuando se aprueba el pago
 export const deleteStorageCart = (state: AppState) => {
-  let storageCart = []
+  const storageCart = [];
   for (let i = 0; i < state.localStorageCart.length; i++) {
-    if (("user" in state.localStorageCart[i]))
-      storageCart.push(state.localStorageCart[i])
+    if ("user" in state.localStorageCart[i])
+      storageCart.push(state.localStorageCart[i]);
   }
 
   return {
     ...state,
-    localStorageCart: storageCart
-  }
-}
+    localStorageCart: storageCart,
+  };
+};
 
-// LOGIN 
+// LOGIN
 export const login = (state = initialState, action: loginAction) => {
-  const user: any = localStorage.getItem(action.payload.user.id)
-  console.log(user);
-  const json = JSON.parse(user)
-  console.log(json);
+  const user: string | null = localStorage.getItem(action.payload.user.id);
+
+  let accessLogin;
   if (user === null) {
-    return {
-      ...state,
-      accessLogin: {
-        access: action.payload.access,
-        id: action.payload.user.id,
-        role: action.payload.user.role
-      }
-    }
+    accessLogin = {
+      acces: action.payload.access,
+      id: action.payload.user.id,
+      role: action.payload.user.role,
+    };
   } else {
-    return {
-      ...state,
-      accessLogin: {
-        access: json.access,
-        id: json.user.id,
-        role: json.user.role
-      }
-    }
+    const json = JSON.parse(user);
+    accessLogin = {
+      access: json.access,
+      id: json.user.id,
+      role: json.user.role,
+    };
   }
-}
+  return {
+    ...state,
+    accessLogin: accessLogin,
+  };
+};
 // LOGOUT
 export const logout = (state = initialState) => {
-  localStorage.removeItem("user")
+  localStorage.removeItem("user");
   return {
     ...state,
     accessLogin: {
@@ -128,79 +132,107 @@ export const logout = (state = initialState) => {
       id: "",
       role: "",
       cart: null,
-    }
-  }
-}
+    },
+  };
+};
 
-export const loginVerification = (state = initialState, action: loginAction) => {
+export const loginVerification = (
+  state = initialState,
+  action: loginAction
+) => {
   return {
     ...state,
     accessLogin: {
       access: action.payload.access,
       id: action.payload.user.id,
-      role: action.payload.user.role
-    }
-  }
-}
-//ALMACENAR numero de paginas para el shop 
+      role: action.payload.user.role,
+    },
+  };
+};
+//ALMACENAR numero de paginas para el shop
 export const totalPagesShop = (
   state = initialState,
   action: ActionWithPayload<string, number>
 ) => {
   return {
     ...state,
-    totalPages: action.payload
-  }
-}
+    totalPages: action.payload,
+  };
+};
 
-export const urlImage = (state = initialState, action: ActionWithPayload<string, number>) => {
+export const urlImage = (
+  state = initialState,
+  action: ActionWithPayload<string, number>
+) => {
   return {
     ...state,
-    urlImage: action.payload
-  }
-}
+    urlImage: action.payload,
+  };
+};
 
 export const hasNavigatedTrue = (state = initialState) => {
-  const userValue: any = localStorage.getItem('user');
-  const userObject = JSON.parse(userValue);
-  userObject.hasNavigated = true;
-  const updatedUserValue = JSON.stringify(userObject);
-  localStorage.setItem('user', updatedUserValue);
+  const userValue: string | null = localStorage.getItem("user");
+
+  if (userValue) {
+    const userObject = JSON.parse(userValue);
+
+    userObject.hasNavigated = true;
+
+    const updatedUserValue = JSON.stringify(userObject);
+
+    localStorage.setItem("user", updatedUserValue);
+  }
+
   return {
     ...state,
-    hasNavigated: true
-  }
-}
+    hasNavigated: true,
+  };
+};
 
-export const buyerId = (state = initialState, action: ActionWithPayload<string, number>) =>{
-  return{
-    ...state,
-    idBuyer: action.payload
-  }
-} 
-
-export const sellerId = (state = initialState, action: ActionWithPayload<string, number>) =>{
-  return{
-    ...state,
-    idSeller: action.payload
-  }
-} 
-
-export const userCompanySalesSummary = (state = initialState, action: salesSumAction) => {
-  return{
-    ...state,
-    companySalesSum: action.payload
-  }
-}
-export const userCompanySalesDetail = (state = initialState, action: salesDetailAction) => {
-  return{
-    ...state,
-    companySalesDetail: action.payload
-  }
-}
-export const getTopRated = (state = initialState, action:ActionWithPayload<string, any> )=>{
+export const buyerId = (
+  state = initialState,
+  action: ActionWithPayload<string, number>
+) => {
   return {
-    ...state ,
-    topProducts:action.payload
-  }
-}
+    ...state,
+    idBuyer: action.payload,
+  };
+};
+
+export const sellerId = (
+  state = initialState,
+  action: ActionWithPayload<string, number>
+) => {
+  return {
+    ...state,
+    idSeller: action.payload,
+  };
+};
+
+export const userCompanySalesSummary = (
+  state = initialState,
+  action: salesSumAction
+) => {
+  return {
+    ...state,
+    companySalesSum: action.payload,
+  };
+};
+export const userCompanySalesDetail = (
+  state = initialState,
+  action: salesDetailAction
+) => {
+  return {
+    ...state,
+    companySalesDetail: action.payload,
+  };
+};
+export const getTopRated = (
+  state = initialState,
+  action: ActionWithPayload<string, any>
+) => {
+  return {
+    ...state,
+    topProducts: action.payload,
+  };
+};

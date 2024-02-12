@@ -19,7 +19,7 @@ const Shop = () => {
   const filters = useSelector((state: AppState) => state.beerFilters)
 
   //numero de paginas recibidas desde el back 
-  let pages = useSelector((state: AppState) => state.totalPages)
+  const pages = useSelector((state: AppState) => state.totalPages)
 
 
   //traer la cantidad de articulos en el local storage
