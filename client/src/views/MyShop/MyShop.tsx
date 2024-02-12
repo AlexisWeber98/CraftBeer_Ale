@@ -28,7 +28,7 @@ const MyShop = ({ idPersonAdmin, idCompanyAdmin }: any) => {
         const response = await axios.get(endpoint);
         setAllHistoryDataSeller(response.data);
       } catch (error) {
-        console.error(error);
+       
       }
     };
     useEffect(() => {
@@ -44,7 +44,7 @@ const MyShop = ({ idPersonAdmin, idCompanyAdmin }: any) => {
             userPersonId: userId,
           },
         });
-        console.log("dataaa", response.data);
+     
 
         setAllHistoryData(response.data);
       } catch (error) {
@@ -56,7 +56,6 @@ const MyShop = ({ idPersonAdmin, idCompanyAdmin }: any) => {
     }, []);
   }
 
-  console.log("estado local", allHistoryDataSeller);
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>

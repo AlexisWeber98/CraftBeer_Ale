@@ -64,16 +64,11 @@ const SellerSingUp: React.FC = () => {
 
   const handlerSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(input);
     dispatch(createdCompany(input));
     setInput({
       ...input,
     });
   };
-  
-  
-  console.log(input);
-  console.log(errors);
   
 
   const validation = (input: any, name: any) => {

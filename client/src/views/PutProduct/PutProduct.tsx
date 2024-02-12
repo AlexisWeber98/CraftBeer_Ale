@@ -47,7 +47,7 @@ const PutProduct = () => {
         status: false,
         image: "",
     });
-    console.log(putBeer)
+   
     const [isLoading, setIsLoading] = useState(true);
     // HANDLERS
     const { id } = useParams();
@@ -121,11 +121,11 @@ const PutProduct = () => {
         const fetchBeer = async () => {
         try {
             const { data } = await axios.get(`/product/admin/${id}`);
-            console.log("DATA",data);
+          
             const updatedPutBeer = { ...putBeer, ...data };
             setPutBeer(updatedPutBeer);
         } catch (error) {
-            console.log(error);
+     
             console.error("Error fetching beer", error);
         } finally {
             setTimeout(() => {
