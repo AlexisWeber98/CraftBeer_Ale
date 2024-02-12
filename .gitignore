@@ -1,6 +1,10 @@
 api/dist
 client/dist
 
+# env
+
+*.env
+
 # Logs
 logs
 *.log
