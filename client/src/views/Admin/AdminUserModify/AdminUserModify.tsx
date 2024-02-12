@@ -1,6 +1,6 @@
 import { Card, Col, Container, Row, Form, Button } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { DragAndDrop } from "../../../components/Cloudinary/Cloudinary.tsx";
@@ -50,7 +50,6 @@ interface CountryData {
 
 const AdminUserModify = () => {
   const id = useSelector((state: AppState) => state.idBuyer);
-  console.log("esot es elID", id);
 
   const [userData, setUserData] = useState<UserData | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -66,7 +65,7 @@ const AdminUserModify = () => {
 
         setUserData(response.data);
       } catch (error) {
-        console.log(error);
+    
         console.error("Error fetching user", error);
       }
     };
@@ -224,8 +223,7 @@ const AdminUserModify = () => {
                       as="select"
                       name="country"
                       value={editedUserData.country}
-                      onChange={handleInputChange}
-                    >
+                      onChange={handleInputChange}>
                       <option value="">Select your country...</option>
                       {countryNames.map((countryName, index) => (
                         <option key={index} value={countryName}>
@@ -249,8 +247,7 @@ const AdminUserModify = () => {
                       as="select"
                       name="state"
                       value={editedUserData.state}
-                      onChange={handleInputChange}
-                    >
+                      onChange={handleInputChange}>
                       <option value="">Select your province...</option>
                       {editedUserData.country &&
                         provincesByCountry[editedUserData.country]?.map(
@@ -275,16 +272,14 @@ const AdminUserModify = () => {
                     <Button
                       className={styles.buttonEdit}
                       type="submit"
-                      disabled={disable()}
-                    >
+                      disabled={disable()}>
                       Save change
                     </Button>
                   </div>
                   <div style={{ textAlign: "center", marginTop: "1%" }}>
                     <Button
                       onClick={() => navigate(-1)}
-                      className={styles.buttonEdit}
-                    >
+                      className={styles.buttonEdit}>
                       Back
                     </Button>
                   </div>
@@ -302,16 +297,14 @@ const AdminUserModify = () => {
                   <div style={{ textAlign: "center" }}>
                     <Button
                       className={styles.buttonEdit}
-                      onClick={handleEditClick}
-                    >
+                      onClick={handleEditClick}>
                       Edit
                     </Button>
                   </div>
                   <div style={{ textAlign: "center", marginTop: "1%" }}>
                     <Button
                       onClick={() => navigate(-1)}
-                      className={styles.buttonEdit}
-                    >
+                      className={styles.buttonEdit}>
                       Back
                     </Button>
                   </div>
