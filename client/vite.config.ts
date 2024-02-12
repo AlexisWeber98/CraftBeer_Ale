@@ -9,16 +9,6 @@ export default defineConfig({
   define: {
     "process.env": process.env,
   },
-  server: {
-    // Agrega una configuración de proxy para manejar las solicitudes de archivos TypeScript
-    proxy: {
-      "/src/": {
-        target: "https://craftbeershop.netlify.app/", // Cambia esto por la URL de tu servidor de desarrollo
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/src/, ""),
-      },
-    },
-  },
   resolve: {
     alias: [
       { find: '@', replacement: path.resolve(__dirname, 'src') }
