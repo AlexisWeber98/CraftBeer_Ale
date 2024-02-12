@@ -122,8 +122,6 @@ export interface topProducts {
 const dataStorage = Object.keys(localStorage).map((key) =>
   JSON.parse(localStorage[key])
 );
-console.log("fadfsf", dataStorage);
-
 export const initialState: AppState = {
   allBeer: [],
   beerFilters: {},
