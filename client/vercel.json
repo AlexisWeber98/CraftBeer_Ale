@@ -1,8 +1,19 @@
 {
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/"
-    }
-  ]
-}
+    "version": 2,
+    "name": "craftbeershop",
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/static-build",
+        "config": { "distDir": "dist" }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "headers": { "cache-control": "s-maxage=1, stale-while-revalidate" },
+        "dest": "/index.html"
+      }
+    ]
+  }
+  
