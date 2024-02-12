@@ -8,7 +8,7 @@ dotenv.config();
 
 // Sincronizar la base de datos y levantar el servidor
 sequelize
-  .sync({ force: true })
+  .sync({ force: f })
   .then(() => {
    dataBase();
     console.log("Database synchronized");
