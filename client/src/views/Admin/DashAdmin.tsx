@@ -53,8 +53,8 @@ const Administrador = () => {
       const response = await axios.get("/companies");
       setSellers(response.data);
       setType("seller");
-      console.log(sellers);
-        console.log(type);
+ 
+   
       toast.success("Seller information has been uploaded");
     } catch (error) {
       toast.error("Unable to load data");
@@ -66,8 +66,6 @@ const Administrador = () => {
       const response = await axios.get("/persons");
       setBuyers(response.data);
       setType("buyer");
-      console.log(buyers);
-      console.log(type);
       toast.success("Buyer information has been uploaded");
     } catch (error) {
       toast.error("Unable to load data");

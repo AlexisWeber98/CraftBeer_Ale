@@ -142,7 +142,7 @@ const User = () => {
         const response = await axios.get(`/persons/${id}`);
         setUserData(response.data);
       } catch (error) {
-        console.log(error);
+    
         console.error("Error fetching user", error);
       } finally {
         // Se oculta la imagen de loading después de 3 segundos

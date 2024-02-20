@@ -12,7 +12,7 @@ const AdminHistoryShopBuyer = () => {
 
   const id = useSelector((state: AppState) => state.idBuyer);
   const [infoUser, setInfoUser] = useState<any>({});
-  console.log("esot es buyer id ", id);
+
 
   useEffect(() => {
     const solicitud = async () => {

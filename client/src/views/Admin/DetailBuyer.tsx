@@ -18,7 +18,6 @@ import { toast } from "react-hot-toast";
 const DetailBuyer: React.FC = () => {
   const navigate = useNavigate()
   const id = useSelector((state: AppState) => state.idBuyer);
-  console.log(id);
   
   const [infoUser, setInfoUser] = useState<any>({});
 

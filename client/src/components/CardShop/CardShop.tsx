@@ -35,7 +35,6 @@ const CardShop = () => {
     let [allBeersData, setAllBeersData] = useState<BeerData[]>([]);
 
 
-console.log("Estosssss",allBeersData);
 
     // traemos el estado de filtros 
     const filters: BeerFilters = useSelector((state: AppState) => state.beerFilters)
@@ -46,7 +45,7 @@ console.log("Estosssss",allBeersData);
         try {
             const response = await axios.get<responseBack>(endpoint, { params: filters });
             setAllBeersData(response.data.products);
-            console.log(response.data.products);
+           
             dispatch(totalPages(response.data.totalPages))
         } catch (error) {
             console.error(error);
@@ -79,8 +78,6 @@ console.log("Estosssss",allBeersData);
             <h1> Upps!!! no hay cervezas disponibles. </h1>
             <h5>Prueba con filtros distintos</h5>
         </div>)
-
-console.log("esto es la valoracionnnn",allBeersData);
 
 
     return (

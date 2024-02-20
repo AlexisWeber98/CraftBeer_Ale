@@ -13,19 +13,19 @@ const ProductsBySeller = () => {
   const id = useSelector((state: AppState) => state.idSeller);
 
   const [infoUser, setInfoUser] = useState<any>({});
-  console.log(infoUser);
+
 
   useEffect(() => {
     const solicitud = async () => {
       const response = await axios.get(`/company/${id}`);
-      console.log(response.data);
+
       setInfoUser(response.data);
     };
     solicitud();
   }, [id, infoUser]);
 
   let products = infoUser.Products;
-  console.log(products);
+
 
   const handlerActive = async (event: any) => {
     try {
@@ -34,7 +34,6 @@ const ProductsBySeller = () => {
         companyId: infoUser.id,
         status: "true",
       };
-      console.log(idProduct);
       await axios.put(`/product/${idProduct}`, activar);
       toast.success("Product has been activated");
     } catch (error) {
@@ -49,7 +48,7 @@ const ProductsBySeller = () => {
         companyId: infoUser.id,
         status: "false",
       };
-      console.log(idProduct);
+ 
       await axios.put(`/product/${idProduct}`, inactivar);
       toast.success("Product has been inactivated");
     } catch (error) {

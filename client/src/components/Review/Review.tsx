@@ -66,7 +66,7 @@ const Review = ({ name, isReview, setisReview, id }: ReviewProps) => {
             toast.error("Tu valoracion no se pudo realizar, intenta nuevamente.");
 
         }
-        console.log(dataReview);
+       
         setisReviewModal(false);
         setisReview(false)
     }

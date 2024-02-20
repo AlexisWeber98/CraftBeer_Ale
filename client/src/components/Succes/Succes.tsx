@@ -66,9 +66,8 @@ const Succes = () => {
 
             const endpoint = "/shoppingHistory";
             try {
-                console.log("DATA post shoping",dataPay);
+            
                 const response = await axios.post(endpoint, dataPay); 
-                console.log("response post shoping",response);
 
             } catch (error) {
                 console.error(error);

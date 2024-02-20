@@ -17,16 +17,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     dispatch(allBeers())
   }, []);
-  // useEffect(()=>{
-  //   const userJSON = localStorage.getItem("user")
-  //   console.log(userJSON);
-    
-  //   if(userJSON){
-  //     const user = JSON.parse(userJSON)
-  //     dispatch(verificationLogin(user))
-  //     console.log(user);
-  //   }
-  // }, [dispatch])
+
 
 
   return (

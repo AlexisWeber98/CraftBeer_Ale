@@ -59,7 +59,7 @@ const AdminCompanyModify: React.FC = () => {
     id: "",
     image: urlImage,
   });
-  console.log(companyData.image);
+
 
   const [errors, setErrors] = useState<company>({
     name: "",
@@ -88,7 +88,7 @@ const AdminCompanyModify: React.FC = () => {
     setCompanyData((prevInput) => ({ ...prevInput, image: urlImage }));
   }, [urlImage]);
 
-  console.log(companyData);
+
   const [isClicked, setIsClicked] = useState<boolean>(false);
   // HANDLERS
   const handlerIsClicked = () => {

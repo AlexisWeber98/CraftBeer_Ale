@@ -16,7 +16,7 @@ export const fileUpload = async (file: File): Promise<string | null> => {
 
     if (!res.ok) return null;
     const data = await res.json();
-    console.log(data.secure_url);
+  
     return data.secure_url;
   } catch (error) {
     return null;

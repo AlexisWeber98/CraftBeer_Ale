@@ -33,31 +33,16 @@ const Detail = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
-  /*  //renderizar la cantidad de estrellas 
-   let stars = "";
-   if (qualification) {
-       let replacementCount = Math.min(qualification, stars.length);
-       let replacementStars = "⭐".repeat(replacementCount);
-       stars = replacementStars + stars.substring(replacementCount);
-   }
-   let qualificationJSX = (
-       <>
-           {stars}
-       </>
-   );
-*/
-
-
 
   useEffect(() => {
     const fetchBeer = async () => {
       try {
         const response = await axios.get(`/product/${id}`);
         setBeer(response.data);
-        console.log(response.data);
+       
 
       } catch (error) {
-        console.log(error);
+        
         console.error('Error fetching beer', error);
       } finally {
         // Se oculta la imagen de loading después de 3 segundos

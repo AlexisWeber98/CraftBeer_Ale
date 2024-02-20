@@ -143,9 +143,7 @@ const Creation = () => {
     }
     return disabled;
   };
-  console.log(input);
-  console.log(errors);
-  
+
 
   return (
     <div className="bodyFormP">

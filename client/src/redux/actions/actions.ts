@@ -128,7 +128,6 @@ export const createdProduct = ({
         type: CREATED_PRODUCT,
         payload: createdBeer,
       });
-      console.log(createdBeer);
       toast.success("Se creo correctamente su producto");
     } catch (error: any) {
       if (error.response.data.message === undefined)

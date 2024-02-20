@@ -84,7 +84,6 @@ const CardModel = ({ name, summary, image, price, stock, id, type, IBU, ABV, qua
         } else if (inputValue <= stock) {
             setItem(inputValue); // Establecer el valor si está dentro del rango de stock
         }
-        console.log("2", inputValue);
 
         const itemData: SaveDataLS = {
             id,
