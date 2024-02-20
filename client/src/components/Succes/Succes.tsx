@@ -68,6 +68,7 @@ const Succes = () => {
             try {
             
                 const response = await axios.post(endpoint, dataPay); 
+                response;
 
             } catch (error) {
                 console.error(error);
