@@ -13,7 +13,7 @@ export default defineConfig({
   base: "./", 
   server: {
     proxy: {
-      '/api': {
+      '/': {
         target: 'https://sh1cc4n7-3000.brs.devtunnels.ms',
         changeOrigin: true,
         secure: false,
