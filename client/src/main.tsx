@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 // axios.defaults.baseURL = 'http://localhost:3001'
 axios.defaults.baseURL = 'https://craftbeer-api.fly.dev/'
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = false;
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
