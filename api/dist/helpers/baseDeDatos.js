@@ -11,6 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../db");
 const dataBase = () => __awaiter(void 0, void 0, void 0, function* () {
+    if ((yield db_1.UserCompany.count()) > 0)
+        return;
     let companies = [
         {
             name: "Alberto",
