@@ -18,7 +18,10 @@ exports.sequelize = sequelize;
 const basename = path_1.default.basename(__filename);
 const modelDefiners = [];
 fs_1.default.readdirSync(path_1.default.join(__dirname, "/src/models"))
-    .filter((file) => file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js")
+    .filter((file) => file.indexOf(".") !== 0 &&
+    file !== basename &&
+    /\.(ts|js)$/.test(file) &&
+    !file.endsWith(".d.ts"))
     .forEach((file) => {
     const modelDefiner = require(path_1.default.join(__dirname, "/src/models", file));
     modelDefiners.push(modelDefiner.default);

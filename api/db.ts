@@ -25,7 +25,10 @@ const modelDefiners: Array<(sequelize: Sequelize) => void> = [];
 fs.readdirSync(path.join(__dirname, "/src/models"))
   .filter(
     (file) =>
-      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".ts"
+      file.indexOf(".") !== 0 &&
+      file !== basename &&
+      /\.(ts|js)$/.test(file) &&
+      !file.endsWith(".d.ts")
   )
   .forEach((file) => {
     const modelDefiner = require(path.join(__dirname, "/src/models", file));

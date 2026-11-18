@@ -1,6 +1,9 @@
 import { UserCompany, Product, UserPerson, Qualification, ShoppingHistory, Item  } from "../db";
 
 const dataBase = async () => {
+  // Seed only an empty database so restarts keep existing data.
+  if ((await UserCompany.count()) > 0) return;
+
   let companies = [
     {
       name: "Alberto",

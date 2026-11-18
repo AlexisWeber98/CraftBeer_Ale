@@ -6,7 +6,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
 const server = express();
-const routes = require("./routes/index.ts");
+const routes = require("./routes");
 
 server.use(express.json());
 server.use(cors())
