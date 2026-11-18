@@ -567,6 +567,113 @@
     }
 }
 
+/* Mobile: card grows with its content instead of a fixed 50vh height */
+@media (max-width: 768px) {
+  .form,
+  .formSubmit,
+  .formError {
+    box-sizing: border-box;
+    width: 90%;
+    max-width: 420px;
+    height: auto;
+    min-height: 0;
+    gap: 14px;
+    padding: 0 0 24px;
+  }
+
+  .input1,
+  .inputError1 {
+    margin-top: 64px;
+  }
+
+  .avatarCont,
+  .avatarContSubmit,
+  .avatarContError {
+    width: 96px;
+    height: 96px;
+    margin-bottom: -48px;
+  }
+
+  .avatar {
+    height: 64px;
+  }
+
+  .input,
+  .input1,
+  .inputError,
+  .inputError1 {
+    width: 85%;
+    margin-bottom: 0;
+  }
+
+  .input div,
+  .input1 div,
+  .inputError div,
+  .inputError1 div {
+    width: 48px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+
+  .input div img,
+  .input1 div img,
+  .inputError div img,
+  .inputError1 div img {
+    height: 24px;
+  }
+
+  .input input,
+  .input1 input,
+  .input input:focus,
+  .input1 input:focus,
+  .inputError input,
+  .inputError1 input,
+  .inputError input:focus,
+  .inputError1 input:focus {
+    height: 44px;
+    font-size: 16px;
+  }
+
+  .label {
+    width: 85%;
+    font-size: 13px;
+  }
+
+  .checks {
+    width: 85%;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .forgot {
+    color: rgba(163, 125, 52, 1);
+  }
+
+  .submit,
+  .submit:hover,
+  .submit:active,
+  .submit:disabled,
+  .submit:disabled:hover,
+  .signUp {
+    height: 44px;
+    width: 60%;
+    min-width: 140px;
+    margin-top: 0;
+  }
+
+  .googleContainer {
+    width: 85%;
+    left: auto;
+  }
+
+  .validationMessage {
+    width: 85%;
+    margin: -8px 0 0;
+    transform: none;
+    font-size: 13px;
+  }
+}
+
 /* Tablet: centered card ~560px wide with px-based controls instead of vh/vw sizes */
 @media (min-width: 769px) and (max-width: 1024px) {
   .all {

@@ -108,3 +108,52 @@ transform: scale(1.1);
     transform: scale(1.03);
   }
 }
+
+/* Mobile: single column form, compact spacing, logo below */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .formBoxContainer {
+    flex: none;
+    height: auto;
+    padding: 12px;
+  }
+
+  .formBox {
+    height: auto;
+    padding: 12px;
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  .form :global(.row) {
+    flex-direction: column;
+    margin: 8px 0 !important;
+  }
+
+  .form :global(.col) {
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .input,
+  .input:focus {
+    font-size: 16px;
+    transform: none;
+  }
+
+  .imageContainer {
+    flex: none;
+    justify-content: center;
+    margin: 0;
+  }
+
+  .image {
+    max-width: 200px;
+    width: 60vw;
+    object-fit: contain;
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.6);
+  }
+}

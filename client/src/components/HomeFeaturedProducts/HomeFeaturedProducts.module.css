@@ -126,3 +126,16 @@
     margin-top: 6vw;
   }
 }
+
+/* Mobile: title and gold band scaled 20% to track the larger mini cards */
+@media (max-width: 768px) {
+  .title {
+    font-size: 31px;
+    text-underline-offset: 10px;
+  }
+  .bigContainer {
+    height: 46.8vw;
+    margin-bottom: 31.2vw;
+    margin-top: 12.2%;
+  }
+}

@@ -83,3 +83,56 @@ transform: scale(1.1);
     text-align: center; 
     color: black;
 } */
+
+/* Tablet: wider card, auto height */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .formBoxContainer {
+    height: auto;
+    padding: 24px;
+  }
+
+  .form {
+    width: min(680px, 90vw);
+    height: auto;
+    box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.6);
+  }
+
+  .row1 {
+    width: 90%;
+  }
+
+  .input:focus {
+    transform: scale(1.03);
+  }
+}
+
+/* Mobile: full-width card, single column fields */
+@media (max-width: 768px) {
+  .formBoxContainer {
+    height: auto;
+    padding: 12px;
+  }
+
+  .form {
+    width: 100%;
+    height: auto;
+    padding: 12px;
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  .row1 {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .row1 > * {
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .input,
+  .input:focus {
+    font-size: 16px;
+    transform: none;
+  }
+}

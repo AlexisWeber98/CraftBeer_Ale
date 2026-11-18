@@ -79,3 +79,44 @@
     width: 70%;
   }
 }
+
+/* Mobile: stacked tiles sized in px */
+@media (max-width: 768px) {
+  .all {
+    margin-top: 24px;
+    padding: 0 16px;
+    text-align: center;
+  }
+
+  .all h2 {
+    font-size: 1.4rem;
+  }
+
+  .select {
+    width: 100%;
+    height: auto;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px 0;
+  }
+
+  .imgDiv,
+  .link:hover .imgDiv {
+    width: 140px;
+    height: 170px;
+    border-radius: 24px;
+  }
+
+  .imgDiv img {
+    height: 100px;
+  }
+
+  .h3Div {
+    width: 75%;
+  }
+
+  .h3Div h3 {
+    font-size: 1.2rem;
+    margin: 4px 0;
+  }
+}

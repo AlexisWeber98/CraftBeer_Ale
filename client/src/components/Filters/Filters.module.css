@@ -225,3 +225,71 @@
         min-height: 36px;
     }
 }
+
+/* Toggle only exists on mobile; on larger screens the panel is always visible */
+.toggleFilters {
+    display: none;
+}
+
+/* Mobile: collapsible full-width panel with a two-column grid of selects */
+@media (max-width: 768px) {
+    .container {
+        display: block;
+        position: static;
+        margin: 0 0 16px;
+        padding: 0 12px;
+        text-align: center;
+    }
+
+    .toggleFilters {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        border: 1px solid rgb(239, 180, 18);
+        border-radius: 30px;
+        background-color: rgb(63, 54, 54);
+        color: rgb(239, 180, 18);
+        font-weight: 600;
+    }
+
+    .filters {
+        display: none;
+        width: 100%;
+        height: auto;
+        margin-top: 12px;
+        padding: 12px;
+        border-radius: 16px;
+    }
+
+    .filtersOpen {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 12px;
+        align-items: end;
+    }
+
+    .filtersOpen .buttonFilters {
+        grid-column: 1 / -1;
+        justify-self: center;
+        margin: 0 0 4px;
+    }
+
+    .buttonFilters:disabled {
+        opacity: 0.3;
+    }
+
+    .title_select {
+        margin: 12px 0 4px;
+        font-size: 13px;
+    }
+
+    .select {
+        width: 100%;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .select:hover {
+        scale: 1;
+    }
+}

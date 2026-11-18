@@ -361,3 +361,17 @@
     margin-left: -8vw;
   }
 }
+
+/* Mobile: carousel enlarged twice by 20% (50.6vw -> 60.7vw -> 72.8vw), title scaled to match */
+@media (max-width: 768px) {
+  .title {
+    font-size: 31px;
+    text-underline-offset: 10px;
+  }
+
+  .carousel,
+  .linkMain,
+  .linkMain:hover {
+    width: 72.8vw;
+  }
+}

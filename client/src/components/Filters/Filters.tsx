@@ -12,6 +12,8 @@ const Filters = () => {
     })
 
     const [buttonDisable, setbuttonDisable] = useState(true)
+    // Mobile only: filters panel is collapsible
+    const [isOpen, setIsOpen] = useState(false)
 
     // controlar los input de option 
     const handlerOptions = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -51,7 +53,14 @@ const Filters = () => {
 
     return (
         <div className={style.container}>
-            <div className={style.filters}>
+            <button
+                type="button"
+                className={style.toggleFilters}
+                aria-expanded={isOpen}
+                onClick={() => setIsOpen(!isOpen)}>
+                {isOpen ? "Hide filters ▲" : "Filters ▼"}
+            </button>
+            <div className={`${style.filters} ${isOpen ? style.filtersOpen : ""}`}>
                 <button className={style.buttonFilters} disabled={buttonDisable} onClick={handlerButtonClick}>Clean filters</button>
                 <p className={style.title_select}>Order by price</p>
                 <select onChange={handlerOptions} className={style.select} name="order">

@@ -208,7 +208,7 @@ useEffect(() => {
     <div className={Styles.container}>
       <div className={Styles.formBoxContainer}>
         <div className={Styles.formBox}>
-          <Form  onSubmit={handleSubmit} style={{ width: "700px", height: "auto", padding: "10px" }}>
+          <Form  onSubmit={handleSubmit} className={Styles.form} style={{ width: "100%", maxWidth: "700px", height: "auto", padding: "10px", margin: "0 auto" }}>
             <Row style={{ margin: '15px' }}>
               <Col >
                 Nombre:
