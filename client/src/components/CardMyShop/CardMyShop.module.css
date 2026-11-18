@@ -162,3 +162,130 @@
 .container{
     opacity: 0.2;
 }
+
+/* Total column (was an inline style) */
+.totalBox {
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    padding-right: 20px;
+    padding-left: 15px;
+    border-left: 1px solid gray;
+}
+
+/* Tablet: the purchase row wraps instead of relying on fixed widths */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .containerCard {
+        height: auto;
+        flex-wrap: wrap;
+        align-items: center;
+        row-gap: 10px;
+    }
+    .image {
+        width: 120px;
+        height: 100px;
+        flex-shrink: 0;
+    }
+    .containerInfo {
+        flex: 1;
+        width: auto;
+        min-width: 0;
+    }
+    .containerPriceTotal {
+        flex: 1 1 340px;
+        width: auto;
+        margin-left: 10px;
+    }
+    .containerPrice {
+        width: auto;
+    }
+    .containerState {
+        width: 140px;
+    }
+}
+
+/* Mobile: image + name on top, price and state stacked full width below */
+@media (max-width: 768px) {
+    .containerReview {
+        margin: 12px 0 0;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+    }
+    .containerReview p {
+        margin: 0;
+    }
+    .containerButton {
+        margin-left: 0;
+        min-height: 32px;
+        padding: 0 12px;
+    }
+    .containerCard {
+        height: auto;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0;
+    }
+    .image {
+        width: 26vw;
+        height: 26vw;
+        margin: 0;
+        flex-shrink: 0;
+    }
+    .containerInfo {
+        flex: 1;
+        width: auto;
+        min-width: 0;
+        margin-left: 0;
+        white-space: normal;
+    }
+    .containerInfo h3 {
+        font-size: 16px;
+    }
+    .containerInfo p {
+        font-size: 13px;
+        margin: 0;
+    }
+    .containerPriceTotal {
+        width: 100%;
+        margin-left: 0;
+        padding: 10px 12px;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .containerPrice {
+        width: auto;
+        margin-left: 0;
+    }
+    .containerPrice p {
+        font-size: 13px;
+        margin: 2px 0;
+    }
+    .totalBox {
+        margin-left: 0;
+        padding: 0 0 0 12px;
+    }
+    .totalBox h3 {
+        font-size: 16px;
+        margin: 0;
+    }
+    .totalBox h6 {
+        margin: 0;
+    }
+    .containerState {
+        width: 100%;
+        margin-left: 0;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 8px;
+    }
+    .containerState h3 {
+        font-size: 15px;
+        margin: 0;
+    }
+    .containerState h6 {
+        margin: 0;
+    }
+}

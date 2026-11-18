@@ -31,3 +31,33 @@
   ;
   border-bottom: 2px solid rgb(72, 71, 71);
 }
+/* Tablet: panel uses almost the full width */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    width: 94vw;
+    margin: 16px 0;
+    padding: 20px;
+    min-height: 60vh;
+  }
+}
+
+/* Mobile: compact panel, no horizontal overflow */
+@media (max-width: 768px) {
+  .container {
+    width: calc(100vw - 20px);
+    margin: 10px 0;
+    padding: 14px;
+    border-radius: 12px;
+    min-height: 50vh;
+    box-sizing: border-box;
+  }
+  .container h2 {
+    margin-left: 0;
+    font-size: 22px;
+  }
+  .container h1 {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
+  }
+}

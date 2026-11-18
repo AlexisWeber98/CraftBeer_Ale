@@ -56,3 +56,51 @@
     align-items: center;
   }
   
+/* Buttons: real heights instead of percentages */
+.buttonEdit,
+.buttonback {
+  height: auto;
+  min-height: 44px;
+}
+
+/* Tablet: centered profile card with readable sizes */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .box {
+    max-width: 640px;
+    margin: 20px auto;
+    padding: 20px;
+    font-size: 18px;
+  }
+  .Title {
+    font-size: 26px;
+  }
+  .image {
+    max-width: 35%;
+  }
+}
+
+/* Mobile: full-width card, smaller text, centered photo */
+@media (max-width: 768px) {
+  .box {
+    margin: 12px 0;
+    padding: 12px;
+    font-size: 16px;
+  }
+  .Title {
+    font-size: 22px;
+    padding-bottom: 8px;
+  }
+  .image {
+    display: block;
+    max-width: 45%;
+    margin: 8px auto;
+  }
+  .notFound {
+    font-size: 28px;
+    text-align: center;
+  }
+  .beerLoading {
+    width: 80%;
+    height: auto;
+  }
+}

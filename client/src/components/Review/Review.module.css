@@ -179,3 +179,54 @@
     background-color: rgba(0, 0, 0, 0.7); /* Adjust opacity as needed */
     z-index: 2;
 }
+
+/* Tablet (769-1024px): review/cart rows use the full width with px-based image and price blocks */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .containerCard {
+        width: 100%;
+        height: auto;
+        min-height: 140px;
+        align-items: center;
+    }
+
+    .image {
+        width: 120px;
+        height: 100px;
+        flex-shrink: 0;
+    }
+
+    .containerInfo {
+        width: 40%;
+        min-width: 0;
+    }
+
+    .containerPrice {
+        width: 160px;
+    }
+
+    .containerPriceTotal {
+        width: 100%;
+        max-width: 400px;
+        margin-left: 0;
+    }
+
+    .containerState {
+        width: 140px;
+    }
+
+    .modal {
+        width: 90%;
+        max-width: 600px;
+        height: auto;
+        min-height: 230px;
+    }
+}
+
+/* Mobile: review modal fits the screen */
+@media (max-width: 768px) {
+    .modal {
+        width: 90vw;
+        height: auto;
+        padding: 16px;
+    }
+}

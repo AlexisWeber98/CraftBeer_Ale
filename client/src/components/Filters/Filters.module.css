@@ -197,3 +197,31 @@
         border-radius: 20px;
     }
 }
+
+
+/* Tablet (769-1024px): sidebar panel fits the narrow column and never overflows it */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        margin-bottom: 20px;
+    }
+
+    .filters {
+        width: 100%;
+        max-width: 230px;
+        height: auto;
+        min-height: 0;
+        margin: 0 auto;
+        padding: 12px;
+    }
+
+    .select {
+        width: 100%;
+        height: 36px;
+        font-size: 14px;
+    }
+
+    .buttonFilters {
+        padding: 6px 20px;
+        min-height: 36px;
+    }
+}

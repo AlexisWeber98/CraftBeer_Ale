@@ -22,3 +22,23 @@
     justify-content: center;
     align-items: center;
   }
+
+/* Tablet: shorter panel not tied to viewport height, readable heading size */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    box-sizing: border-box;
+    width: auto;
+    height: auto;
+    min-height: 420px;
+    margin: 24px;
+  }
+
+  .messageBuy {
+    width: 70vw;
+    max-width: 640px;
+  }
+
+  .messageBuy h1 {
+    font-size: 40px;
+  }
+}

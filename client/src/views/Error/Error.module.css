@@ -102,3 +102,34 @@
         border: 0.03vh solid rgba(163, 125, 52, 1);
     }
 }
+
+/* Tablet: centered card ~560px wide with px-based avatar and spacing */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .all {
+    margin-top: 32px;
+    margin-bottom: 48px;
+  }
+
+  .avatarCont {
+    width: 120px;
+    height: 120px;
+    margin-bottom: -60px;
+  }
+
+  .avatar {
+    height: 110px;
+  }
+
+  .error {
+    box-sizing: border-box;
+    width: min(560px, 80vw);
+    height: auto;
+    min-height: 380px;
+    padding: 32px 24px;
+  }
+
+  .error h1 {
+    margin-top: 56px;
+    height: auto;
+  }
+}

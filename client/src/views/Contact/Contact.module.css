@@ -284,3 +284,58 @@
         border: 0.02vh solid black;
     }
 }
+
+/* Tablet: px-based controls, wider inputs and a comfortable message box */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .all {
+    margin-top: 24px;
+  }
+
+  .form {
+    width: 88%;
+  }
+
+  .upperLeft input {
+    width: 100%;
+    max-width: 320px;
+    margin-bottom: 16px;
+  }
+
+  .upperLeft label {
+    margin-bottom: 4px;
+  }
+
+  .upperRight {
+    margin-right: 4vw;
+  }
+
+  .message {
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+
+  .message textarea {
+    height: 200px;
+    border-radius: 8px;
+  }
+
+  .inputDiv input {
+    width: 28vw;
+    min-width: 200px;
+  }
+
+  .inputDiv p {
+    margin-left: 24px;
+  }
+
+  .submit,
+  .submit:hover,
+  .submit:active,
+  .submit:disabled,
+  .submit:disabled:hover {
+    margin-top: 32px;
+    width: 200px;
+    height: 48px;
+    border-radius: 8px;
+  }
+}

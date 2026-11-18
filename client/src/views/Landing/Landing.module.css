@@ -7,7 +7,7 @@
   justify-content: center;
   height: 100%;
   width: 100%;
-  position: relative; 
+  position: relative;
 }
 
 .wallpaper::before {
@@ -17,17 +17,17 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-.whiteText{
-  z-index: 1; 
+.whiteText {
+  z-index: 1;
   flex-shrink: 0;
   color: rgb(255, 255, 255);
   text-align: center;
   padding: 2.5%;
   font-family: Inter;
-  font-size: 50px;
+  font-size: 26px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -35,13 +35,14 @@
   margin-right: 10%;
 }
 
-.cuestion{
+.cuestion {
   z-index: 1;
   text-align: center;
   color: #FFF;
   font-size: 50px;
 }
-.birdthday{
+
+.birdthday {
   z-index: 1;
   position: center;
   font-size: 30px;
@@ -51,44 +52,103 @@
 }
 
 .comproved {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #fff;
-    background-color: rgba(163, 125, 52, 1);
-    border-bottom: px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: background-color 0.3s;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  background-color: rgba(163, 125, 52, 1);
+  border-bottom: px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s;
+}
+
+.comproved:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.comproved:hover {
+  background-color: rgba(163, 125, 52, 1);
+}
+
+.comproved:hover:before {
+  transform: scaleX(1);
+}
+
+.comproved:active {
+  background-color: #1d3a7a;
+}
+
+/* Mobile: grow with content instead of clipping it, and scale text down */
+@media (max-width: 768px) {
+  .wallpaper {
+    height: auto;
+    min-height: 100vh;
+    padding: 4vh 0;
   }
-  
-  .comproved:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+
+  .whiteText {
+    font-size: 18px;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .cuestion {
+    font-size: 34px;
+    padding: 0 5%;
+  }
+
+  .birdthday {
+    font-size: 20px;
+    max-width: 90%;
+  }
+
+  .comproved {
+    margin: 2vh 0;
+  }
+}
+
+/* Tablet (769-1024px): px-based type so the age gate stays on one screen without scroll */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .wallpaper {
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.3);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s;
+    min-height: 100%;
   }
-  
-  .comproved:hover {
-    background-color:rgba(163, 125, 52, 1);
+
+  .whiteText {
+    font-size: 22px;
+    padding: 1.5%;
+    margin-left: 8%;
+    margin-right: 8%;
   }
-  
-  .comproved:hover:before {
-    transform: scaleX(1);
+
+  .cuestion {
+    font-size: 44px;
+    margin: 0.4em 0;
   }
-  
-  .comproved:active {
-    background-color: #1d3a7a;
+
+  .birdthday {
+    font-size: 24px;
+    max-width: 70%;
   }
-  
+
+  .comproved {
+    font-size: 18px;
+    padding: 12px 28px;
+    margin: 1.5vh 0;
+  }
+}

@@ -89,3 +89,89 @@ height: 10%;
   flex-direction: column;
   align-items: center;
 }
+
+/* Mobile: keep everything inside the viewport and stack card, image and reviews */
+@media (max-width: 768px) {
+  /* Match Bootstrap's gutter so the Row's negative margins don't overflow */
+  .container {
+    padding: 0 12px;
+  }
+
+  .card {
+    width: 100%;
+    font-size: 17px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .buttonback {
+    height: auto;
+    padding: 10px;
+  }
+
+  .imageContainer {
+    align-items: center;
+  }
+
+  .image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .review {
+    margin: 20px 0 30px;
+  }
+  .notFound {
+    font-size: 28px;
+    text-align: center;
+  }
+}
+
+
+/* Tablet (769-1024px): two balanced columns, card no longer overflows (was 120% wide) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .card {
+    width: 100%;
+    font-size: 20px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .buttonback {
+    height: auto;
+    min-height: 44px;
+    padding: 10px;
+  }
+
+  .imageContainer {
+    align-items: center;
+    justify-content: flex-start;
+    padding: 12px;
+  }
+
+  .image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  .review {
+    min-height: 160px;
+    margin: 24px 0 30px;
+  }
+
+  .notFound {
+    font-size: 36px;
+    text-align: center;
+  }
+}

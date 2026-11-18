@@ -1,6 +1,53 @@
 .title {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 9vh;
+  font-weight: bold;
+  color: white;
+  display: inline-block;
+  background-image: url('https://media.istockphoto.com/id/1129687007/es/foto/blanco-y-negro-grunge-textura-las-l%C3%ADneas-rasc%C3%B3-la-superficie-blanca-con-manchas-negras.jpg?s=1024x1024&w=is&k=20&c=l80ScHfmduImwxiayiPqYv-1Zp_fhVGKgjINmKI03IM=');
+  background-repeat: repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-decoration: underline solid;
+  text-decoration-color: rgba(163, 125, 52, 1);
+  text-underline-offset: 1.8vh;
+}
+
+.div {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 36vh;
+}
+
+.bigContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(163, 125, 52, 1);
+  box-shadow: 0 0 1vw rgba(163, 125, 52, 1);
+  height: 18vh;
+  margin-bottom: 0.5%;
+  margin-top: 15%;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  margin-top: 8%;
+  transform: translateY(-60%)
+}
+
+@media (max-width: 768px) {
+  .title {
     font-family: 'Arial Black', sans-serif;
-    font-size: 9vh;
+    font-size: 3.5vh;
     font-weight: bold;
     color: white;
     display: inline-block;
@@ -11,76 +58,85 @@
     color: transparent;
     text-decoration: underline solid;
     text-decoration-color: rgba(163, 125, 52, 1);
-    text-underline-offset: 1.8vh; 
-}
-.div{
+    text-underline-offset: 1.8vh;
+  }
+
+  .div {
     justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: column;
-    margin-bottom: 36vh;
-}
-.bigContainer {
+    margin-bottom: 8vh;
+  }
+
+  .bigContainer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     background-color: rgba(163, 125, 52, 1);
     box-shadow: 0 0 1vw rgba(163, 125, 52, 1);
-    height: 18vh;
+    height: 10vh;
     margin-bottom: 0.5%;
     margin-top: 15%;
     width: 100%;
-}
-.container {
+  }
+
+  .container {
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 90%;
     margin-top: 8%;
-    transform: translateY(-60%)
+    transform: translateY(-40%)
+  }
+}
+
+/* Mobile: section titles share one size with the carousel title */
+@media (max-width: 768px) {
+  .title {
+    font-size: 26px;
+    text-underline-offset: 8px;
+  }
+}
+
+/* Gold band sized for the half-size cards */
+@media (min-width: 769px) {
+  .div {
+    margin-bottom: 18vh;
+  }
+  .bigContainer {
+    height: 9vh;
+    margin-top: 7.5%;
+  }
 }
 @media (max-width: 768px) {
-    .title {
-        font-family: 'Arial Black', sans-serif;
-        font-size: 3.5vh;
-        font-weight: bold;
-        color: white;
-        display: inline-block;
-        background-image: url('https://media.istockphoto.com/id/1129687007/es/foto/blanco-y-negro-grunge-textura-las-l%C3%ADneas-rasc%C3%B3-la-superficie-blanca-con-manchas-negras.jpg?s=1024x1024&w=is&k=20&c=l80ScHfmduImwxiayiPqYv-1Zp_fhVGKgjINmKI03IM=');
-        background-repeat: repeat;
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-        text-decoration: underline solid;
-        text-decoration-color: rgba(163, 125, 52, 1);
-        text-underline-offset: 1.8vh; 
-    }
-    .div{
-        justify-content: center;
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 8vh;
+    .div {
+      margin-bottom: 56px;
     }
     .bigContainer {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        background-color: rgba(163, 125, 52, 1);
-        box-shadow: 0 0 1vw rgba(163, 125, 52, 1);
-        height: 10vh;
-        margin-bottom: 0.5%;
-        margin-top: 15%;
-        width: 100%;
+      height: 13vw;
+      margin-top: 9%;
     }
-    .container {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        width: 90%;
-        margin-top: 8%;
-        transform: translateY(-40%)
-    }
+}
+
+/* Tablet (769-1024px): width-based title and gold band so it tracks the 3 cards (each ~32vw tall) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .title {
+    font-size: 34px;
+    text-underline-offset: 8px;
+  }
+
+  .div {
+    margin-bottom: 19vw;
+  }
+
+  .bigContainer {
+    height: 9.5vw;
+    margin-top: 9vw;
+  }
+
+  .container {
+    margin-top: 14.9vw;
+  }
 }

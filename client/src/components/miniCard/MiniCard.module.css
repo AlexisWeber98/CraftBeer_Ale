@@ -162,3 +162,124 @@
     }
 }
 
+
+/* Half-size cards: every dimension of the card is 50% of the original */
+.container {
+  width: 15%;
+}
+.img {
+  height: 23.5vh;
+  width: 12vw;
+  object-fit: contain;
+  border-radius: 1vh 1vh 0 0;
+}
+.img_Container {
+  border-radius: 1vh 1vh 0 0;
+}
+.h2_Container,
+.container:hover .h2_Container {
+  height: 7vh;
+  border-radius: 0 0 1vh 1vh;
+}
+.h2_Container h4 {
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 0 4px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 15%;
+  }
+  /* Size from the width so short screens don't shrink the image */
+  .img {
+    height: 19vw;
+    width: 14vw;
+  }
+  /* Name box grows with the text so long names stay readable */
+  .h2_Container,
+  .container:hover .h2_Container {
+    width: 15.4vw;
+    height: auto;
+    min-height: 3.9vh;
+    padding: 2px 0;
+  }
+  .h2_Container h4 {
+    font-size: 8.4px;
+    padding: 0 1px;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* One clipped box: image and name share the card's width, so they can't drift apart */
+.nav {
+  width: 12vw;
+  height: auto;
+  align-items: stretch;
+  border: 1px solid rgb(56, 56, 56);
+  border-radius: 1vh;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.container:hover .nav {
+  box-shadow: 0 0 1vw rgba(163, 125, 52, 1);
+}
+.img_Container,
+.h2_Container,
+.container:hover .img_Container,
+.container:hover .h2_Container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+.img {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    width: 14vw;
+    border-radius: 6px;
+  }
+  .img {
+    width: 100%;
+  }
+}
+
+/* Tablet (769-1024px): card sized from its width (3:4 image), so it is never thin or stretched */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    width: 21%;
+  }
+
+  .nav {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .img {
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: contain;
+  }
+
+  .h2_Container,
+  .container:hover .h2_Container {
+    height: 7vw;
+    min-height: 48px;
+  }
+
+  .h2_Container h4 {
+    font-size: 14px;
+    padding: 0 6px;
+    overflow-wrap: anywhere;
+  }
+}

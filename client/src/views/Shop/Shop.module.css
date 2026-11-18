@@ -182,6 +182,31 @@
         opacity: 0.3;
     }
 
+    /* Search row spans the full width and the input absorbs the free space */
+    .search {
+        width: 100%;
+        margin-top: 20px;
+        align-items: center;
+    }
+
+    .input_Search {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .button,
+    .buttonAll {
+        flex-shrink: 0;
+        color: white;
+    }
+
+    /* Floating cart sits in the bottom corner so it never covers the cards */
+    .imageCart {
+        top: auto;
+        bottom: 20px;
+        right: 35px;
+    }
+
 }
 
 
@@ -566,4 +591,74 @@
         opacity: 0.3;
     }
 
+}
+
+/* Tablet (769-1024px): sidebar + single column of cards, no fixed laptop offsets */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .search {
+        width: 100%;
+        padding-left: 0;
+        margin-top: 24px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .input_Search {
+        flex: 1;
+        min-width: 0;
+        width: auto;
+        max-width: 480px;
+        height: 44px;
+    }
+
+    .button,
+    .buttonAll {
+        flex-shrink: 0;
+        height: 44px;
+        color: white;
+    }
+
+    .button {
+        width: 44px;
+    }
+
+    .containerTitlePublicidad {
+        margin-left: 0;
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .containerLogo {
+        width: 100%;
+        max-width: 200px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        margin: 0 auto 20px;
+    }
+
+    .containerpublicidad {
+        width: 100%;
+        max-width: 200px;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        margin: 0 auto 16px;
+    }
+
+    .button_Page,
+    .button_Pagelateral,
+    .button_Pagechange {
+        width: 44px;
+        height: 44px;
+    }
+
+    .imageCart {
+        top: auto;
+        bottom: 24px;
+        right: 24px;
+    }
+
+    .cardsContainer {
+        padding-left: 0;
+        min-width: 0;
+    }
 }

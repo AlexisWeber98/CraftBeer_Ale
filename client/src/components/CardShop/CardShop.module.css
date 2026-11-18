@@ -23,3 +23,33 @@
     font-size: 30px;
 
   }
+
+@media (max-width: 768px) {
+  .message {
+    width: 100%;
+  }
+  .message h1 {
+    font-size: 32px;
+  }
+  .message h5 {
+    font-size: 20px;
+  }
+}
+
+
+/* Tablet (769-1024px): out-of-stock/empty message fits the column instead of fixed 890px */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .message {
+        width: 100%;
+        max-width: 720px;
+        margin-top: 32px;
+    }
+
+    .message h1 {
+        font-size: 40px;
+    }
+
+    .message h5 {
+        font-size: 24px;
+    }
+}

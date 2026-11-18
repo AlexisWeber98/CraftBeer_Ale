@@ -566,3 +566,97 @@
         transform: translateY(-90%);
     }
 }
+
+/* Tablet: centered card ~560px wide with px-based controls instead of vh/vw sizes */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .all {
+    margin-top: 32px;
+    margin-bottom: 48px;
+  }
+
+  .avatarCont,
+  .avatarContSubmit,
+  .avatarContError {
+    width: 120px;
+    height: 120px;
+    margin-bottom: -60px;
+  }
+
+  .avatar {
+    height: 90px;
+  }
+
+  .form,
+  .formSubmit,
+  .formError {
+    box-sizing: border-box;
+    width: min(560px, 80vw);
+    height: auto;
+    min-height: 520px;
+    padding: 0 0 32px;
+  }
+
+  .input1,
+  .inputError1 {
+    margin-top: 64px;
+  }
+
+  .input,
+  .input1,
+  .inputError,
+  .inputError1 {
+    width: 80%;
+    margin-bottom: 8px;
+  }
+
+  .input div,
+  .input1 div,
+  .inputError div,
+  .inputError1 div {
+    width: 56px;
+    height: 48px;
+  }
+
+  .input div img,
+  .input1 div img,
+  .inputError div img,
+  .inputError1 div img {
+    height: 28px;
+  }
+
+  .input input,
+  .input1 input,
+  .input input:focus,
+  .input1 input:focus,
+  .inputError input,
+  .inputError1 input,
+  .inputError input:focus,
+  .inputError1 input:focus {
+    height: 48px;
+    font-size: 16px;
+  }
+
+  .label {
+    font-size: 16px;
+  }
+
+  .submit,
+  .submit:hover,
+  .submit:active,
+  .submit:disabled,
+  .submit:disabled:hover,
+  .signUp {
+    height: 48px;
+    min-width: 160px;
+  }
+
+  .googleContainer {
+    width: 60%;
+    left: auto;
+  }
+
+  .validationMessage {
+    margin-top: -24px;
+    margin-bottom: -24px;
+  }
+}

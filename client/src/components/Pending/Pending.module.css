@@ -18,3 +18,17 @@
     margin: 20px;
     padding: 30px;
   }
+
+/* Tablet: keep the message at a readable width inside the panel */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .messageBuy {
+    width: 70vw;
+    max-width: 640px;
+  }
+
+  .container {
+    box-sizing: border-box;
+    width: auto;
+    margin: 24px;
+  }
+}

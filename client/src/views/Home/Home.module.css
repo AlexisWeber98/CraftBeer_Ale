@@ -2,3 +2,10 @@
     display: flex;
     flex-direction: column;
 }
+
+/* Tablet (769-1024px): guard against horizontal scroll from the overlapping carousel/cards */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .grandContainer {
+    overflow-x: hidden;
+  }
+}

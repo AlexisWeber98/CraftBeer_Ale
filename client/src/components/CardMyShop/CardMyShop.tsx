@@ -62,7 +62,7 @@ const CardMyShop = ({ name, date, quantity, unitPrice, totalPrice, image,id }: c
                             <p>CANTIDAD : {quantity} Unidad/s</p>
                             <p> PRECIO UNITARIO : {unitPrice} US$</p>
                         </div>
-                        <div style={{ display: "flex", flexDirection: "column", marginLeft: "40px", paddingRight: "20px", borderLeft: "gray 1px solid", paddingLeft: "15px" }}>
+                        <div className={style.totalBox}>
                             <h3>Total</h3>
                             <h6>{totalPrice} Usd </h6>
                         </div>

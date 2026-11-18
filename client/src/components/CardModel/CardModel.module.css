@@ -15,10 +15,11 @@
         color: #d09527;
         display: flex;
         overflow: hidden;
-        width: 340px;
+        width: calc(100% - 38px);
+        max-width: 340px;
         flex-direction: row;
         justify-content: space-between;
-        margin: 19px;
+        margin: 19px auto;
         height: 550px;
         box-shadow: 0 0 8px 4px rgba(208, 149, 39, 0.1);
     }
@@ -792,4 +793,54 @@
         appearance: none
     }
 
+}
+
+/* Tablet (769-1024px): product card fills its column; image keeps a fixed aspect ratio */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .card {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        min-height: 240px;
+        margin: 10px 0;
+    }
+
+    .image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        max-height: 200px;
+    }
+
+    .colPrice {
+        height: auto;
+        min-width: 0;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .textContainer {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .buttonBuy {
+        width: 80%;
+        min-height: 36px;
+        height: auto;
+        font-size: 14px;
+    }
+
+    .custom_button {
+        width: 36px;
+        height: 36px;
+    }
+
+    .input {
+        width: 70px;
+        margin-left: 0;
+        height: 32px;
+    }
 }

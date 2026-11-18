@@ -409,3 +409,37 @@
         border-right: none;
     }
 }
+/* Tablet (769-1024px): 56px bar, px-sized type and dropdowns (desktop vh/vw values are too big/small here) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .navContainer {
+        height: 56px;
+    }
+    .link h5 {
+        font-size: 15px;
+        margin: 0;
+    }
+    .link2main h5,
+    .link2mainAd h5,
+    .link3 h5,
+    .link3 h6 {
+        font-size: 14px;
+        margin: 0;
+    }
+    .link2, .link3, .link4, .link2main, .link2mainAd {
+        width: 140px;
+        height: 56px;
+    }
+    .link3 {
+        margin-top: -9px;
+    }
+    .dropdownContent, .dropdownContent3 {
+        width: 140px;
+        height: 187px;
+        margin-top: 56px;
+    }
+    .dropdownContent2 {
+        width: 140px;
+        height: 249px;
+        margin-top: 87px;
+    }
+}
